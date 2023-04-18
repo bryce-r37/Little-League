@@ -1,5 +1,6 @@
 # Little-League
-Intro to Databases Final Project
+
+##Intro to Databases Final Project
 Team Members:
 - Bryce Robinson
 - Carson Buntin
