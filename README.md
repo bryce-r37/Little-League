@@ -14,3 +14,9 @@ source venv/bin/activate
 pip install flask
 pip install python-dotenv
 ```
+
+## Python Modules Imported
+```
+flask
+pymysql
+```
