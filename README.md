@@ -12,11 +12,15 @@ In project directory, run the follwoing.
 python3 -m venv venv
 source venv/bin/activate
 pip install flask
+pip install flask-wtf
+pip install flask-login
 pip install python-dotenv
 ```
 
 ## Python Modules Imported
 ```
 flask
+flask-wtf
+flask-login
 pymysql
 ```
