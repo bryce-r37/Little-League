@@ -1,0 +1,39 @@
+<!doctype html>
+
+<html>
+   <head>
+      <title>Login - Little League</title>
+   </head>
+   <body>
+      <div>
+         <h1>Login</h1>
+         <form>
+            <div className='form-group'>
+               <label>Email:</label>
+               <input
+                  name='email'
+                  className='form-control'
+                  type='text'
+               />
+            </div>
+            <div className='form-group'>
+               <label>Password:</label>
+               <input
+                  name='password'
+                  className='form-control'
+                  type='password'
+               />
+            </div>
+            <div>
+               <a href="/home">
+                  <button className = "button" onClick={{ handleSubmit }}>Login</button>
+               </a>
+               <a href="/">
+                  <button className = "button">Back</button>
+               </a>
+            </div>
+            <div id="errorID">{{ errorMessage }}</div>
+         </form>
+      </div>
+   </body>
+</html>
