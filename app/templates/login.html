@@ -5,34 +5,19 @@
       <title>Login - Little League</title>
    </head>
    <body>
-      <div>
+      <div classname='container'>
          <h1>Login</h1>
-         <form>
-            <div className='form-group'>
-               <label>Email:</label>
-               <input
-                  name='email'
-                  className='form-control'
-                  type='text'
-               />
-            </div>
-            <div className='form-group'>
-               <label>Password:</label>
-               <input
-                  name='password'
-                  className='form-control'
-                  type='password'
-               />
-            </div>
-            <div>
-               <a href="/home">
-                  <button className = "button" onClick={{ handleSubmit }}>Login</button>
-               </a>
-               <a href="/">
-                  <button className = "button">Back</button>
-               </a>
-            </div>
-            <div id="errorID">{{ errorMessage }}</div>
+         <form action='' method='post' novalidate>
+            {{ form.hidden_tag() }}
+            <p>
+               {{ form.email.label }}<br>
+               {{ form.email(size=32) }}
+            </p>
+            <p>
+               {{ form.password.label }}<br>
+               {{ form.password(size=32) }}
+            </p>
+            <p>{{ form.submit() }}</p>
          </form>
       </div>
    </body>
