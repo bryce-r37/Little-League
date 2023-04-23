@@ -19,3 +19,7 @@ def home():
 def login():
    form = LoginForm()
    return render_template('login.html', title='Sign In', form=form)
+
+@app.route('/createAccount')
+def createAccount():
+   return render_template('createAccount.html')

@@ -2,7 +2,7 @@ body {
     margin: 0;
     padding: 0;
     font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-    background: linear-gradient(to bottom, #00c853, #0077c2, #8e24aa);
+/* background: linear-gradient(to bottom, #00c853, #0077c2, #8e24aa); */
 }
 
 .container {
