@@ -38,6 +38,10 @@ input {
     border: 1px solid #ccc;
 }
 
+.center-text {
+  text-align: center;
+}
+
 .button {
     margin-top: 20px;
     padding: 10px;

@@ -19,7 +19,7 @@
    <div class='container'>
 		<h1>Create Account</h1>
 		<form action='' method='post' novalidate>
-         {{ form.hidden_tag(form) }}
+         {{ form.hidden_tag() }}
          <p> 
             {{ form.nameF.label }}<br>
             {{ form.nameF(size=32) }}<br>
@@ -40,6 +40,9 @@
             {% for error in form.email.errors %}
             <span style="color: red;">{{ error }}</span>
             {% endfor %}
+            {% if message %}
+            <div class="alert alert-danger" style="color: red; text-align: center">{{ message }}</div>
+            {% endif %}
          </p>
          <p>
             {{ form.password.label }}<br>
