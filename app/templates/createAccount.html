@@ -19,7 +19,7 @@
    <div class='container'>
 		<h1>Create Account</h1>
 		<form action='' method='post' novalidate>
-         {{ form.hidden_tag() }}
+         {{ form.hidden_tag(form) }}
          <p> 
             {{ form.nameF.label }}<br>
             {{ form.nameF(size=32) }}<br>

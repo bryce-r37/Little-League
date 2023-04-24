@@ -3,8 +3,11 @@
 # date: 4/18/23
 
 from flask import render_template, flash, redirect, url_for
+from flask_login import current_user
+
 from app import app
 from app.forms import LoginForm
+from app.forms import CreateAccountForm
 
 
 @app.route('/')
@@ -30,4 +33,5 @@ def login():
 
 @app.route('/createAccount')
 def createAccount():
-    return render_template('createAccount.html')
+    form = CreateAccountForm
+    return render_template('createAccount.html', form=form)
