@@ -7,18 +7,55 @@
 	<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
-	<div class="container">
+   {% with messages = get_flashed_messages() %}
+   {% if messages %}
+   <ul>
+      {% for message in messages %}
+      <li>{{ message }}</li>
+      {% endfor %}
+   </ul>
+   {% endif %}
+   {% endwith %}
+   <div class='container'>
 		<h1>Create Account</h1>
-		<form>
-			<label for="name">Name:</label>
-			<input type="text" id="name" name="name" required>
-			<label for="email">Email:</label>
-			<input type="email" id="email" name="email" required>
-			<label for="password">Password:</label>
-			<input type="password" id="password" name="password" required>
-			<label for="confirm-password">Confirm Password:</label>
-			<input type="password" id="confirm-password" name="confirm-password" required>
-			<button type="submit">Create Account</button>
+		<form action='' method='post' novalidate>
+         {{ form.hidden_tag() }}
+         <p> 
+            {{ form.nameF.label }}<br>
+            {{ form.nameF(size=32) }}<br>
+            {% for error in form.nameF.errors %}
+            <span style="color: red;">{{ error }}</span>
+            {% endfor %}
+         </p>
+         <p>
+            {{ form.nameL.label }}<br>
+            {{ form.nameL(size=32) }}<br>
+            {% for error in form.nameL.errors %}
+            <span style="color: red;">{{ error }}</span>
+            {% endfor %}
+         </p>
+         <p>
+            {{ form.email.label }}<br>
+            {{ form.email(size=32) }}<br>
+            {% for error in form.email.errors %}
+            <span style="color: red;">{{ error }}</span>
+            {% endfor %}
+         </p>
+         <p>
+            {{ form.password.label }}<br>
+            {{ form.password(size=32) }}<br>
+            {% for error in form.password.errors %}
+            <span style="color: red;">{{ error }}</span>
+            {% endfor %}
+         </p>
+         <p>
+            {{ form.passwordConf.label }}<br>
+            {{ form.passwordConf(size=32) }}<br>
+            {% for error in form.passwordConf.errors %}
+            <span style="color: red;">{{ error }}</span>
+            {% endfor %}
+         </p>
+         <p type='submit'>{{ form.submit() }}</p>
 		</form>
 		<p>Already have an account? <a href="/login">Login</a>.</p>
 	</div>

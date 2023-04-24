@@ -13,6 +13,7 @@ python3 -m venv venv
 source venv/bin/activate
 pip install flask
 pip install flask-wtf
+pip install email-validator
 pip install flask-login
 pip install python-dotenv
 ```
