@@ -1,0 +1,26 @@
+{% extends "team.html" %}
+
+{% block stats %}
+   <h3>Pitching</h3>
+   <table>
+      <tr>
+         <th>Player</th>
+         <th>G</th>
+         <th>GS</th>
+         <th>IP</th>
+         <th>WHIP</th>
+         <th>SO/9</th>
+      </tr>
+      {% for player in players %}
+      <tr>
+         <td><b>{{ player.name }}</b></td>
+         <td>{{ player.p_G }}</td>
+         <td>{{ player.p_GS }}</td>
+         <td>{{ player.p_IPOuts / 3 }}</td>
+         <td>{{ 3 * (player.p_BB + player.p_H) / player.p_IPOuts }}</td>
+         <td>{{ player.p_SO / (player.p_IPOuts / 3) }}</td>
+      </tr>
+      {% endfor %}
+   </table>
+{% endblock %}
+
