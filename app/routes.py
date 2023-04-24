@@ -39,3 +39,13 @@ def createAccount():
                form.password.data))
       return redirect(url_for('home'))
    return render_template('createAccount.html', form=form)
+
+
+@app.route('/team/pitching')
+def pitching():
+   return render_template('pitching.html')
+
+
+@app.route('/team/batting')
+def batting():
+   return render_template('batting.html')
