@@ -6,8 +6,7 @@ from flask import render_template, flash, redirect, url_for
 from flask_login import current_user
 
 from app import app
-from app.forms import LoginForm
-from app.forms import CreateAccountForm
+from app.forms import LoginForm, CreateAccountForm
 
 
 @app.route('/')
@@ -33,5 +32,10 @@ def login():
 
 @app.route('/createAccount')
 def createAccount():
-    form = CreateAccountForm
-    return render_template('createAccount.html', form=form)
+   form = CreateAccountForm()
+   if form.validate_on_submit():
+      flash('CreateAccount requested for nameF {}, nameL {}, email {}, password {}'.format(
+               form.nameF.data, form.nameL.data, form.email.data,
+               form.password.data))
+      return redirect(url_for('home'))
+   return render_template('createAccount.html', form=form)
