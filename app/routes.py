@@ -2,7 +2,7 @@
 # authors: Bryce Robinson
 # date: 4/18/23
 
-from flask import render_template
+from flask import render_template, flash, redirect
 from app import app
 from app.forms import LoginForm
 
@@ -13,12 +13,16 @@ def index():
 
 @app.route('/home')
 def home():
-   return render_template('home.html')
+   return render_template('home.html', title='Home')
 
-@app.route('/login')
+@app.route('/login', methods=['GET', 'POST'])
 def login():
    form = LoginForm()
-   return render_template('login.html', title='Sign In', form=form)
+   if form.validate_on_submit():
+      flash('Login requested for email {}'.format(
+               form.email.data))
+      return redirect(url_for('home'))
+   return render_template('login.html', form=form)
 
 @app.route('/createAccount')
 def createAccount():

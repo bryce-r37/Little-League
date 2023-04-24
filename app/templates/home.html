@@ -1,15 +1,5 @@
-<!doctype html>
-<html>
-    <head>
-      {% if title %}
-      <title>{{ title }} - Little League</title>
-      {% else %}
-      <title>Welcome to Little League</title>
-      {% endif %}
-    </head>
-    <body>
-        <div>Little League: <a href="/index">Home</a></div>
-        <hr>
-        {% block content %}{% endblock %}
-    </body>
-</html>
+{% extends "base.html" %}
+
+{% block content %}
+   <h1>This is the Home Page</h1>
+{% endblock %}

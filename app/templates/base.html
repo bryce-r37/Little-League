@@ -8,7 +8,7 @@
       {% endif %}
     </head>
     <body>
-        <div>Little League: <a href="/home">Home</a></div>
+        <div>Little League: <a href="{{ url_for('home') }}">Home</a></div>
         <hr>
         {% block content %}{% endblock %}
     </body>
