@@ -38,10 +38,6 @@ input {
     border: 1px solid #ccc;
 }
 
-.center-text {
-  text-align: center;
-}
-
 .button {
     margin-top: 20px;
     padding: 10px;
@@ -58,4 +54,20 @@ input {
 
 p {
    text-align: center;
+}
+
+.table-wrapper {
+     max-width: 800px;
+     margin: 0 auto;
+     background-color: #fff;
+     border-radius: 5px;
+     overflow: hidden;
+}
+.pitching-table th {
+     font-weight: bold;
+     background-color: #b6ebf8;
+     border: 5px black;
+}
+.pitching-table td {
+     text-align: left;
 }

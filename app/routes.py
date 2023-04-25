@@ -61,7 +61,7 @@ def batting():
    return render_template('batting.html', title='Stats', team=team, year=year,
                           players=FetchBatting(team, year))
 
-@app.route('/player/<playerid>/<table>')
-def player(playerid, table):
+@app.route('/player/<playerid>')
+def player(playerid):
    return render_template('player.html', title='Player Stats',
-                          stints=FetchPlayer(playerid), table=table)
+                          player=FetchPlayer(playerid))
