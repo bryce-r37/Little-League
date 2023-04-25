@@ -33,7 +33,7 @@ werkzeug
 ## Accessing Website
 1. Import **littleleague.sql** into a MariaDB database.
 1. Modify **csi3335sp2023.py** to set correct values in the *sql* dictionary.
-1. Configure python virtual environment with necessary [modules](#Python%20Modules%20Imported).
+1. Configure python virtual environment with necessary [modules](#python-modules-imported).
 1. Run the command `export FLASK_APP=little-league.py`.
 1. Run the command `flask run` to start the web app.
 1. Go to <http://127.0.0.1/5000> to view the website.
