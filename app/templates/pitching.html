@@ -1,11 +1,11 @@
 {% extends "team.html" %}
 
-{% block content %}
+{% block stats %}
    <h2>Pitching</h2>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
-    <script type="text/javascript" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
-    <div class="table-wrapper">
+   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
+   <script type="text/javascript" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+   <div class="table-wrapper">
    <table id="pitching-table">
       <thead>
            <tr>
@@ -20,7 +20,11 @@
       <tbody>
          {% for player in players %}
          <tr>
-            <td><a href="{{ url_for('player', playerid=player[0]) }}"><b>{{ player[1] }}</b></a></td>
+            <td>
+               <a href="{{ url_for('player', playerid=player[0], table='1') }}">
+                  <b>{{ player[1] }}</b>
+               </a>
+            </td>
             <td>{{ player[2] }}</td>
             <td>{{ player[3] }}</td>
             <td>{{ player[4] }}</td>
@@ -30,7 +34,7 @@
          {% endfor %}
       </tbody>
    </table>
-    </div>
+   </div>
    <style>
 
       #pitching-table th {
@@ -65,6 +69,4 @@
       });
    </script>
 {% endblock %}
-
-
 
