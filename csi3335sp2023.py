@@ -1,4 +1,4 @@
 mysql = {'location':'localhost',
-   'user':'web',
-   'password':'goTigers2023!',
-   'database':'Little-League'}
+         'user':'brycerobinson',
+         'password':'password',
+         'database':'littleleague'}

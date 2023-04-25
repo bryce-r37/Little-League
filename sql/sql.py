@@ -30,6 +30,7 @@ def ValidateLogin(form):
    else:
       return "Email/Username not found."
 
+
 def CreateAccount(form):
    sql = "INSERT INTO user (email, username, name, password) VALUES (%s, %s, %s, %s)"
    passwordHash = generate_password_hash(form.password.data)
@@ -47,3 +48,28 @@ def CreateAccount(form):
       else:
          return 'Username already exists. Please choose a different username.'
 
+
+def FetchPitching(team, year):
+   sql = "SELECT playerid, concat(nameFirst, ' ', nameLast), p_G, p_GS, round(p_IPOuts / 3, 5), round(3 * (p_BB + p_H) / p_IPOuts, 5), round(p_SO / (p_IPOuts / 3), 5) FROM pitching NATURAL JOIN people WHERE teamID = %s AND yearID = %s"
+   params = [team, year]
+
+   cur.execute(sql, params)
+
+   return cur.fetchall()
+
+
+def FetchBatting(team, year):
+   sql = "SELECT concat(nameFirst, ' ', nameLast) as Player, b_G FROM batting NATURAL JOIN people WHERE teamID = %s AND yearID = %s"
+   params = [team, year]
+
+   cur.execute(sql, params)
+
+   return cur.fetchall()
+
+def FetchPlayer(playerid):
+   sql = "SELECT concat(nameFirst, ' ', nameLast) FROM people WHERE playerid = %s"
+   params = [playerid]
+
+   cur.execute(sql, params)
+   
+   return cur.fetchall()[0]
