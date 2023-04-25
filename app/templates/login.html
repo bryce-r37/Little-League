@@ -34,6 +34,9 @@
                {% for error in form.password.errors %}
                <span style="color: red;">{{ error }}</span>
                {% endfor %}
+               {% if message %}
+               <div class="alert alert-danger" style="color: red; text-align: center">{{ message }}</div>
+               {% endif %}
             </p>
             <p type='submit'>{{ form.submit(class_="button") }}</p>
          </form>
