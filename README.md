@@ -16,6 +16,8 @@ pip install flask-wtf
 pip install email-validator
 pip install flask-login
 pip install python-dotenv
+pip install pymysql
+pip install werkzeug
 ```
 
 ## Python Modules Imported
@@ -24,4 +26,5 @@ flask
 flask-wtf
 flask-login
 pymysql
+werkzeug
 ```
