@@ -35,13 +35,23 @@
             {% endfor %}
          </p>
          <p>
+            {{ form.username.label }}<br>
+            {{ form.username(size=32) }}<br>
+            {% for error in form.username.errors %}
+            <span style="color: red;">{{ error }}</span>
+            {% endfor %}
+            {% if message2 %}
+            <div class="alert alert-danger" style="color: red; text-align: center">{{ message2 }}</div>
+            {% endif %}
+         </p>
+         <p>
             {{ form.email.label }}<br>
             {{ form.email(size=32) }}<br>
             {% for error in form.email.errors %}
             <span style="color: red;">{{ error }}</span>
             {% endfor %}
-            {% if message %}
-            <div class="alert alert-danger" style="color: red; text-align: center">{{ message }}</div>
+            {% if message1 %}
+            <div class="alert alert-danger" style="color: red; text-align: center">{{ message1 }}</div>
             {% endif %}
          </p>
          <p>

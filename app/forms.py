@@ -10,6 +10,7 @@ from wtforms.validators import DataRequired, Email, EqualTo, Regexp, Length
 class CreateAccountForm(FlaskForm):
     nameF = StringField('First Name', validators=[DataRequired()])
     nameL = StringField('Last Name', validators=[DataRequired()])
+    username = StringField('Username', validators=[DataRequired()])
     email = StringField('Email Address', validators=[DataRequired(), Email("Please enter a valid Email", False, True)])
     password = PasswordField('Password', validators=[DataRequired(),
                                                      Regexp("(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{1,100}",
@@ -22,8 +23,6 @@ class CreateAccountForm(FlaskForm):
 
 
 class LoginForm(FlaskForm):
-    email = StringField('Email', validators=[DataRequired()])
+    email = StringField('Email/Username', validators=[DataRequired()])
     password = PasswordField('Password', validators=[DataRequired()])
     submit = SubmitField('Sign In')
-
-
