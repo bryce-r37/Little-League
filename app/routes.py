@@ -9,7 +9,7 @@ from app import app
 from app.forms import LoginForm, CreateAccountForm
 
 from sql import sql
-from sql.sql import ValidateLogin, CreateAccount
+from sql.sql import ValidateLogin, CreateAccount, FetchPitching, FetchBatting, FetchPlayer
 
 @app.route('/')
 @app.route('/index')
@@ -48,9 +48,20 @@ def createAccount():
 
 @app.route('/team/pitching')
 def pitching():
-   return render_template('pitching.html')
+   team = 'DET'
+   year = '2020'
+   return render_template('pitching.html', title='Stats', team=team, year=year,
+                          players=FetchPitching(team, year))
 
 
 @app.route('/team/batting')
 def batting():
-   return render_template('batting.html')
+   team = 'DET'
+   year = '2020'
+   return render_template('batting.html', title='Stats', team=team, year=year,
+                          players=FetchBatting(team, year))
+
+@app.route('/player/<playerid>')
+def player(playerid):
+   return render_template('player.html', title='Player Stats',
+                          player=FetchPlayer(playerid))
