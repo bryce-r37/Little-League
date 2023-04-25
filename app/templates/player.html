@@ -1,6 +1,29 @@
 {% extends "base.html" %}
 
 {% block content %}
-   <a href="{{ url_for('pitching') }}">Back</a><hr>
-   <h2>{{ player[0] }}</h2>
+   {% if table == '1' %}
+      <a href="{{ url_for('pitching') }}">Back</a><hr>
+   {% else %}
+      <a href="{{ url_for('batting') }}">Back</a><hr>
+   {% endif %}
+   <h2>{{ stints[0][0] }}</h2>
+   {% for stint in stints %}
+      <h3>{{ stint[1] }} - {{ stint[2] }} Season</h3>
+      <table>
+         <tr>
+            <th>Games</th>
+            <th>AVG</th>
+            <th>OBP</th>
+            <th>SLG</th>
+            <th>ERA</th>
+         </tr>
+         <tr>
+            <td>{{ stint[3] }}</td>
+            <td>{{ stint[4] }}</td>
+            <td>{{ stint[5] }}</td>
+            <td>{{ stint[6] }}</td>
+            <td>{{ stint[7] }}</td>
+         </tr>
+      </table>
+   {% endfor %}
 {% endblock %}

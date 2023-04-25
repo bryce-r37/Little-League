@@ -5,7 +5,6 @@
    <table>
       <tr>
          <th>Player</th>
-         <th>G</th>
          <th>P</th>
          <th>C</th>
          <th>1B</th>
@@ -21,8 +20,11 @@
       </tr>
       {% for player in players %}
       <tr>
-         <td><b>{{ player.name }}</b></td>
-         <td>{{ player.b_G }}</td>
+         <td>
+            <a href="{{ url_for('player', playerid=player[0], table='2') }}">
+               <b>{{ player[1] }}</b>
+            </a>
+         </td>
          <td>{{ player.f_P }}</td>
          <td>{{ player.f_C }}</td>
          <td>{{ player.f_1B }}</td>
@@ -32,9 +34,9 @@
          <td>{{ player.f_LF }}</td>
          <td>{{ player.f_CF }}</td>
          <td>{{ player.f_RF }}</td>
-         <td>{{ player.b_AVG }}</td>
-         <td>{{ player.b_OBP }}</td>
-         <td>{{ player.b_SLG }}</td>
+         <td>{{ player[2] }}</td>
+         <td>{{ player[3] }}</td>
+         <td>{{ player[4] }}</td>
       </tr>
       {% endfor %}
    </table>

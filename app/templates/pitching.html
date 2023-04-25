@@ -13,7 +13,11 @@
       </tr>
       {% for player in players %}
       <tr>
-         <td><a href="{{ url_for('player', playerid=player[0]) }}"><b>{{ player[1] }}</b></a></td>
+         <td>
+            <a href="{{ url_for('player', playerid=player[0], table='1') }}">
+               <b>{{ player[1] }}</b>
+            </a>
+         </td>
          <td>{{ player[2] }}</td>
          <td>{{ player[3] }}</td>
          <td>{{ player[4] }}</td>

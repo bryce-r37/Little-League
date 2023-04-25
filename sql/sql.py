@@ -50,7 +50,11 @@ def CreateAccount(form):
 
 
 def FetchPitching(team, year):
-   sql = "SELECT playerid, concat(nameFirst, ' ', nameLast), p_G, p_GS, round(p_IPOuts / 3, 5), round(3 * (p_BB + p_H) / p_IPOuts, 5), round(p_SO / (p_IPOuts / 3), 5) FROM pitching NATURAL JOIN people WHERE teamID = %s AND yearID = %s"
+   sql = "SELECT playerid, concat(nameFirst, ' ', nameLast), p_G, p_GS, " \
+         "round(p_IPOuts / 3, 5), round(3 * (p_BB + p_H) / p_IPOuts, 5), " \
+         "round(p_SO / (p_IPOuts / 3), 5) " \
+         "FROM pitching NATURAL JOIN people " \
+         "WHERE teamID = %s AND yearID = %s"
    params = [team, year]
 
    cur.execute(sql, params)
@@ -59,17 +63,30 @@ def FetchPitching(team, year):
 
 
 def FetchBatting(team, year):
-   sql = "SELECT concat(nameFirst, ' ', nameLast) as Player, b_G FROM batting NATURAL JOIN people WHERE teamID = %s AND yearID = %s"
+   sql = "SELECT playerid, concat(nameFirst, ' ', nameLast), " \
+         "IFNULL(b_H/b_AB, 0), " \
+         "IFNULL((b_H+b_BB+b_HBP)/(b_AB+b_BB+b_HBP+b_SF), 0), " \
+         "IFNULL(((b_H-b_2B-b_3B-b_HR)+(2*b_2B)+(3*b_3B)+(4*b_HR))/b_AB, 0) " \
+         "FROM batting NATURAL JOIN people " \
+         "WHERE teamID = %s AND yearID = %s"
    params = [team, year]
 
    cur.execute(sql, params)
 
    return cur.fetchall()
 
+
 def FetchPlayer(playerid):
-   sql = "SELECT concat(nameFirst, ' ', nameLast) FROM people WHERE playerid = %s"
+   sql = "SELECT concat(nameFirst, ' ', nameLast), team_name, yearid, " \
+         "b_G, IFNULL(b_H/b_AB, 0), " \
+         "IFNULL((b_H+b_BB+b_HBP)/(b_AB+b_BB+b_HBP+b_SF), 0), " \
+         "IFNULL(((b_H-b_2B-b_3B-b_HR)+(2*b_2B)+(3*b_3B)+(4*b_HR))/b_AB, 0), " \
+         "IFNULL(p_ERA, 0) " \
+         "FROM people NATURAL JOIN batting JOIN teams USING (teamid, yearid) " \
+         "LEFT JOIN pitching USING (playerid, yearid, teamid, stint) " \
+         "WHERE playerid = %s" 
    params = [playerid]
 
    cur.execute(sql, params)
    
-   return cur.fetchall()[0]
+   return cur.fetchall()
