@@ -51,8 +51,8 @@ def CreateAccount(form):
 
 def FetchPitching(team, year):
    sql = "SELECT playerid, concat(nameFirst, ' ', nameLast), p_G, p_GS, " \
-         "round(p_IPOuts / 3, 5), round(3 * (p_BB + p_H) / p_IPOuts, 5), " \
-         "round(p_SO / (p_IPOuts / 3), 5) " \
+         "round(p_IPOuts / 3, 3), round(3 * (p_BB + p_H) / p_IPOuts, 3), " \
+         "round(p_SO / (p_IPOuts / 3), 3), round(p_ERA, 2) " \
          "FROM pitching NATURAL JOIN people " \
          "WHERE teamID = %s AND yearID = %s"
    params = [team, year]
@@ -63,25 +63,57 @@ def FetchPitching(team, year):
 
 
 def FetchBatting(team, year):
-   sql = "SELECT playerid, concat(nameFirst, ' ', nameLast), " \
-         "IFNULL(b_H/b_AB, 0), " \
-         "IFNULL((b_H+b_BB+b_HBP)/(b_AB+b_BB+b_HBP+b_SF), 0), " \
-         "IFNULL(((b_H-b_2B-b_3B-b_HR)+(2*b_2B)+(3*b_3B)+(4*b_HR))/b_AB, 0) " \
+   sql = "SELECT playerid, name, AVG, OBP, SLG, P, C, " \
+         "1B, 2B, 3B, SS, LF, CF, RF, OF FROM " \
+         "(SELECT playerid, concat(nameFirst, ' ', nameLast) AS name, " \
+         "teamid, yearid, round(IFNULL(b_H/b_AB, 0), 3) AS AVG, " \
+         "round(IFNULL((b_H+b_BB+b_HBP)/(b_AB+b_BB+b_HBP+b_SF), 0), 3) AS OBP, " \
+         "round(IFNULL(((b_H-b_2B-b_3B-b_HR)+(2*b_2B)+(3*b_3B)+(4*b_HR))/b_AB, 0), 3) AS SLG " \
          "FROM batting NATURAL JOIN people " \
-         "WHERE teamID = %s AND yearID = %s"
+         "WHERE teamid = %s AND yearid = %s AND b_AB != 0) ta " \
+         "LEFT JOIN (SELECT playerid, teamid, yearid, f_G AS 'P' FROM fielding " \
+         "WHERE position = 'P') tb USING (playerid, teamid, yearid) " \
+         "LEFT JOIN (SELECT playerid, teamid, yearid, f_G AS 'C' FROM fielding " \
+         "WHERE position = 'C') tc USING (playerid, teamid, yearid) " \
+         "LEFT JOIN (SELECT playerid, teamid, yearid, f_G AS '1B' FROM fielding " \
+         "WHERE position = '1B') td USING (playerid, teamid, yearid) " \
+         "LEFT JOIN (SELECT playerid, teamid, yearid, f_G AS '2B' FROM fielding " \
+         "WHERE position = '2B') te USING (playerid, teamid, yearid) " \
+         "LEFT JOIN (SELECT playerid, teamid, yearid, f_G AS '3B' FROM fielding " \
+         "WHERE position = '3B') tf USING (playerid, teamid, yearid) " \
+         "LEFT JOIN (SELECT playerid, teamid, yearid, f_G AS 'SS' FROM fielding " \
+         "WHERE position = 'SS') tg USING (playerid, teamid, yearid) " \
+         "LEFT JOIN (SELECT playerid, teamid, yearid, f_G AS 'LF' FROM fielding " \
+         "WHERE position = 'LF') th USING (playerid, teamid, yearid) " \
+         "LEFT JOIN (SELECT playerid, teamid, yearid, f_G AS 'CF' FROM fielding " \
+         "WHERE position = 'CF') ti USING (playerid, teamid, yearid) " \
+         "LEFT JOIN (SELECT playerid, teamid, yearid, f_G AS 'RF' FROM fielding " \
+         "WHERE position = 'RF') tj USING (playerid, teamid, yearid) " \
+         "LEFT JOIN (SELECT playerid, teamid, yearid, f_G AS 'OF' FROM fielding " \
+         "WHERE position = 'OF') tk USING (playerid, teamid, yearid)"
+  
    params = [team, year]
 
    cur.execute(sql, params)
 
-   return cur.fetchall()
+   results = list(cur.fetchall())
+
+   for i in range(len(results)):
+      temp = list(results[i])
+      for j in range(len(temp)):
+         if temp[j] is None:
+            temp[j] = 0
+      results[i] = tuple(temp)
+
+   return tuple(results)
 
 
 def FetchPlayer(playerid):
    sql = "SELECT concat(nameFirst, ' ', nameLast), team_name, yearid, " \
-         "b_G, IFNULL(b_H/b_AB, 0), " \
-         "IFNULL((b_H+b_BB+b_HBP)/(b_AB+b_BB+b_HBP+b_SF), 0), " \
-         "IFNULL(((b_H-b_2B-b_3B-b_HR)+(2*b_2B)+(3*b_3B)+(4*b_HR))/b_AB, 0), " \
-         "IFNULL(p_ERA, 0) " \
+         "b_G, round(IFNULL(b_H/b_AB, 0), 3), " \
+         "round(IFNULL((b_H+b_BB+b_HBP)/(b_AB+b_BB+b_HBP+b_SF), 0), 3), " \
+         "round(IFNULL(((b_H-b_2B-b_3B-b_HR)+(2*b_2B)+(3*b_3B)+(4*b_HR))/b_AB, 0), 3), " \
+         "round(IFNULL(p_ERA, 0), 2) " \
          "FROM people NATURAL JOIN batting JOIN teams USING (teamid, yearid) " \
          "LEFT JOIN pitching USING (playerid, yearid, teamid, stint) " \
          "WHERE playerid = %s" 
