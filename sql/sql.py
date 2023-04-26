@@ -48,6 +48,16 @@ def CreateAccount(form):
       else:
          return 'Username already exists. Please choose a different username.'
 
+def FetchTeams():
+   sql = "SELECT team_name FROM teams"
+   cur.execute(sql)
+   return cur.fetchall()
+
+def FetchYears(team):
+   sql = "SELECT yearID FROM teams WHERE team_name = %s"
+   params = [team]
+   cur.execute(sql, params)
+   return cur.fetchall()
 
 def FetchPitching(team, year):
    sql = "SELECT playerid, concat(nameFirst, ' ', nameLast), p_G, p_GS, " \
