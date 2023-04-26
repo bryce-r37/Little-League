@@ -10,38 +10,43 @@
    <body>
       <div class="container">
          <h1>Home Base</h1>
-         <form action="/team-selection" method="post">
+         <form action="/home" method="post">
           <label for="team">Team:</label>
-          <select id="team" name="team"></select><br><br>
+          <select id="team" name="team" onchange="getYears(this.value)">
+              {% for team in teams %}
+                <option value="{{ team[0] }}">{{ team[0] }}</option>
+              {% endfor %}
+          </select>
+          <script>
+        function getYears(team) {
+          var xhr = new XMLHttpRequest();
+          xhr.open('GET', '/years/' + team);
+          xhr.onload = function() {
+            if (xhr.status === 200) {
+              var years = JSON.parse(xhr.responseText);
+              var yearSelect = document.getElementById('year');
+              yearSelect.innerHTML = '';
+              years.forEach(function(year) {
+                var option = document.createElement('option');
+                option.text = year;
+                option.value = year;
+                yearSelect.add(option);
+              });
+            } else {
+              console.log('Request failed.  Returned status of ' + xhr.status);
+            }
+          };
+          xhr.send();
+        }
+        getYears(document.getElementById('team').value)
+        </script>
           <label for="year">Year:</label>
           <select id="year" name="year"></select><br><br>
-          <button type="submit">Submit</button>
+          <button type="submit" name="submit">Submit</button>
         </form>
       </div>
    </body>
 </html>
 
-<script>
-  // Generate the options for the year dropdown
-  const start = document.createElement('option');
-  document.getElementById('year').appendChild(start);
-  start.text = "";
-  for (let year = 1871; year <= 2022; year++) {
-    const option = document.createElement('option');
-    option.value = year;
-    option.text = year;
-    document.getElementById('year').appendChild(option);
-  }
-</script>
 
-<script>
-  $(document).ready(function() {
-    $.getJSON("teams.json", function(data) {
-      var teams = data.teams;
-      var teamSelect = $("team");
-      $.each(teams, function(index, team) {
-        teamSelect.append("<option value='" + team.id + "'>" + team.name + "</option>");
-      });
-    });
-  });
-</script>
+
