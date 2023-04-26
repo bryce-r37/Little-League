@@ -1,5 +1,47 @@
-{% extends "base.html" %}
+<!doctype html>
 
-{% block content %}
-   <h1>This is the Home Page</h1>
-{% endblock %}
+<html>
+   <head>
+      <title>Home</title>
+      <meta charset="UTF-8">
+	   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	   <link rel="stylesheet" href="static/css/style.css">
+   </head>
+   <body>
+      <div class="container">
+         <h1>Home Base</h1>
+         <form action="/team-selection" method="post">
+          <label for="team">Team:</label>
+          <select id="team" name="team"></select><br><br>
+          <label for="year">Year:</label>
+          <select id="year" name="year"></select><br><br>
+          <button type="submit">Submit</button>
+        </form>
+      </div>
+   </body>
+</html>
+
+<script>
+  // Generate the options for the year dropdown
+  const start = document.createElement('option');
+  document.getElementById('year').appendChild(start);
+  start.text = "";
+  for (let year = 1871; year <= 2022; year++) {
+    const option = document.createElement('option');
+    option.value = year;
+    option.text = year;
+    document.getElementById('year').appendChild(option);
+  }
+</script>
+
+<script>
+  $(document).ready(function() {
+    $.getJSON("teams.json", function(data) {
+      var teams = data.teams;
+      var teamSelect = $("team");
+      $.each(teams, function(index, team) {
+        teamSelect.append("<option value='" + team.id + "'>" + team.name + "</option>");
+      });
+    });
+  });
+</script>
