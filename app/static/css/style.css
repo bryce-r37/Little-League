@@ -2,9 +2,9 @@ body {
     margin: 0;
     padding: 0;
     font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-}
-
-.container {
+  }
+  
+  .container {
     width: 100%;
     max-width: 600px;
     margin: 0 auto;
@@ -16,58 +16,41 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-}
-
-h1 {
-    text-align: center;
-}
-
-form {
-    display: flex;
-    flex-direction: column;
-}
-
-label {
-    margin-top: 10px;
-    font-weight: bold;
-}
-
-input {
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-}
-
-.button {
+    text-align: center; /* center the h1 and the button container */
+  }
+  
+  h1 {
+    margin-top: 0; /* remove default margin */
+  }
+  
+  .button-container {
     margin-top: 20px;
+    display: flex;
+    justify-content: center; /* center the buttons */
+  }
+  
+  .button {
+    margin: 0 10px; /* add some space between the buttons */
     padding: 10px;
     background-color: #007bff;
     color: #fff;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-}
-
-.button:hover {
+  }
+  
+  .button:hover {
     background-color: #0062cc;
-}
-
-p {
-   text-align: center;
-}
-
-.table-wrapper {
-     max-width: 800px;
-     margin: 0 auto;
-     background-color: #fff;
-     border-radius: 5px;
-     overflow: hidden;
-}
-.pitching-table th {
-     font-weight: bold;
-     background-color: #b6ebf8;
-     border: 5px black;
-}
-.pitching-table td {
-     text-align: left;
-}
+  }
+  
+  p {
+    text-align: center;
+  }
+  
+  label {
+    display: inline-block;
+    text-align: left;
+    width: 215px;
+    margin-right: 10px;
+  }
+  

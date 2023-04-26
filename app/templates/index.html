@@ -1,20 +1,18 @@
 <!doctype html>
-
 <html>
-   <head>
-      <title>Welcome to Little League!</title>
-   </head>
-   <body>
-      <div>
-         <h1>Welcome to Little League!</h1>
-         <div>   
-            <a href='/login'>
-               <button classname='button'>Login</button>
-            </a>
-            <a href='/createAccount'>
-               <button classname='button'>Create Account</button>
-            </a>
-         </div>
+  <head>
+    <title>Welcome to Little League!</title>
+    <meta charset="UTF-8">
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <link rel='stylesheet' href="{{ url_for('static', filename='css/style.css') }}">
+  </head>
+  <body>
+    <div class="container">
+      <h1>Welcome to Little League!</h1>
+      <div class="button-container">
+        <a href='/login'><button class='button'>Login</button></a>
+        <a href='/createAccount'><button class='button'>Create Account</button></a>
       </div>
-   </body>
+    </div>
+  </body>
 </html>
