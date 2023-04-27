@@ -1,14 +1,11 @@
 {% extends "base.html" %}
 
 {% block content %}
-   {% if table == '1' %}
-      <a href="{{ url_for('pitching') }}">Back</a><hr>
-   {% else %}
-      <a href="{{ url_for('batting') }}">Back</a><hr>
-   {% endif %}
    <h2>{{ stints[0][0] }}</h2>
    {% for stint in stints %}
-      <h3>{{ stint[1] }} - {{ stint[2] }} Season</h3>
+      <a href="{{ url_for('pitching', teamID=stint[8], year=stint[2]) }}">
+         <h3>{{ stint[1] }} - {{ stint[2] }} Season</h3>
+      </a>
       <table>
          <tr>
             <th>Games</th>

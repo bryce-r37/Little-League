@@ -1,15 +1,20 @@
 <!doctype html>
 <html>
-    <head>
-      {% if title %}
+   <head>
+   {% if title %}
       <title>{{ title }} - Little League</title>
-      {% else %}
+   {% else %}
       <title>Welcome to Little League</title>
-      {% endif %}
-    </head>
-    <body>
-        <div>Little League: <a href="{{ url_for('home') }}">Home</a></div>
-        <hr>
-        {% block content %}{% endblock %}
-    </body>
+   {% endif %}
+   </head>
+   <body>
+      <div>Little League: 
+         <a href="{{ url_for('home') }}">Team Select</a>
+         {% if admin %}
+            <a href="{{ url_for('admin') }}">User Queries</a>
+         {% endif %}
+      </div>
+      <hr>
+      {% block content %}{% endblock %}
+   </body>
 </html>

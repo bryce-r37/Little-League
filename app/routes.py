@@ -9,7 +9,7 @@ from app import app
 from app.forms import LoginForm, CreateAccountForm
 
 from sql import sql
-from sql.sql import ValidateLogin, CreateAccount, FetchPitching, FetchBatting, FetchPlayer, FetchTeams, FetchYears
+from sql.sql import ValidateLogin, CreateAccount, FetchPitching, FetchBatting, FetchPlayer, FetchTeams, FetchYears, FetchTeamID, FetchTeamName
 
 
 @app.route('/')
@@ -18,17 +18,16 @@ def index():
     return render_template('index.html')
 
 
-@app.route('/home', methods=['GET', 'POST'])
+@app.route('/teams', methods=['GET', 'POST'])
 def home():
     teams = FetchTeams()
     if request.method == 'POST':
         print("test")
         team = request.form.get('team')
         year = request.form.get('year')
-        # do something with the team and year values
-        return render_template('pitching.html', title='Stats', team=team, year=year,
-                               players=FetchPitching(team, year))
-    return render_template('home.html', title='Home', teams=teams)
+        team = FetchTeamID(team)
+        return redirect(url_for('pitching', teamID=team, year=year))
+    return render_template('home.html', title='Team Select', teams=teams)
 
 
 @app.route('/years/<team>')
@@ -61,23 +60,31 @@ def createAccount():
     return render_template('createAccount.html', form=form)
 
 
-@app.route('/team/pitching')
-def pitching():
-    team = 'DET'
-    year = '2020'
-    return render_template('pitching.html', title='Stats', team=team, year=year,
-                           players=FetchPitching(team, year))
+@app.route('/stats/<teamID>/<year>/pitching')
+def pitching(teamID, year):
+    name = FetchTeamName(teamID)
+    return render_template('pitching.html', title='Stats', team=teamID, year=year,
+                           name=name, players=FetchPitching(teamID, year))
 
 
-@app.route('/team/batting')
-def batting():
-    team = 'DET'
-    year = '2020'
-    return render_template('batting.html', title='Stats', team=team, year=year,
-                           players=FetchBatting(team, year))
+@app.route('/stats/<teamID>/<year>/batting')
+def batting(teamID, year):
+    name = FetchTeamName(teamID)
+    return render_template('batting.html', title='Stats', team=teamID, year=year,
+                           name=name, players=FetchBatting(teamID, year))
 
 
-@app.route('/player/<playerid>/<table>')
-def player(playerid, table):
+@app.route('/player/<playerid>')
+def player(playerid):
     return render_template('player.html', title='Player Stats',
-                           stints=FetchPlayer(playerid), table=table)
+                           stints=FetchPlayer(playerid))
+
+
+@app.route('/players')
+def all():
+   return render_template('all.html')
+
+
+@app.route('/admin')
+def admin():
+   return render_template('admin.html')

@@ -51,7 +51,7 @@ def CreateAccount(form):
 
 
 def FetchTeams():
-    sql = "SELECT team_name FROM teams"
+    sql = "SELECT DISTINCT team_name FROM teams ORDER BY team_name"
     cur.execute(sql)
     return cur.fetchall()
 
@@ -63,23 +63,33 @@ def FetchYears(team):
     return cur.fetchall()
 
 
-def FetchPitching(team, year):
-    sql = "SELECT teamID FROM teams WHERE team_name = %s"
+def FetchTeamID(team):
+    sql = "SELECT DISTINCT teamID FROM teams WHERE team_name = %s"
     params = [team]
     cur.execute(sql, params)
 
     teamID = cur.fetchall()
-    teamID_str = str(teamID[0][0])
-    print(teamID_str)
+    return str(teamID[0][0])
 
-    sql2 = "SELECT playerid, concat(nameFirst, ' ', nameLast), p_G, p_GS, " \
-           "round(p_IPOuts / 3, 3), round(3 * (p_BB + p_H) / p_IPOuts, 3), " \
-           "round(p_SO / (p_IPOuts / 3), 3), round(p_ERA, 2) " \
-           "FROM pitching NATURAL JOIN people " \
-           "WHERE teamID = %s AND yearID = %s"
-    params = [teamID_str, year]
 
-    cur.execute(sql2, params)
+def FetchTeamName(teamID):
+   sql = "SELECT DISTINCT team_name FROM teams WHERE teamid = %s"
+   params = [teamID]
+   cur.execute(sql, params)
+
+   team = cur.fetchall()
+   return str(team[0][0])
+
+
+def FetchPitching(team, year):
+    sql = "SELECT playerid, concat(nameFirst, ' ', nameLast), p_G, p_GS, " \
+          "round(p_IPOuts / 3, 3), round(3 * (p_BB + p_H) / p_IPOuts, 3), " \
+          "round(p_SO / (p_IPOuts / 3), 3), round(p_ERA, 2) " \
+          "FROM pitching NATURAL JOIN people " \
+          "WHERE teamID = %s AND yearID = %s"
+    params = [team, year]
+
+    cur.execute(sql, params)
 
     return cur.fetchall()
 
@@ -135,7 +145,7 @@ def FetchPlayer(playerid):
           "b_G, round(IFNULL(b_H/b_AB, 0), 3), " \
           "round(IFNULL((b_H+b_BB+b_HBP)/(b_AB+b_BB+b_HBP+b_SF), 0), 3), " \
           "round(IFNULL(((b_H-b_2B-b_3B-b_HR)+(2*b_2B)+(3*b_3B)+(4*b_HR))/b_AB, 0), 3), " \
-          "round(IFNULL(p_ERA, 0), 2) " \
+          "round(IFNULL(p_ERA, 0), 2), teamid " \
           "FROM people NATURAL JOIN batting JOIN teams USING (teamid, yearid) " \
           "LEFT JOIN pitching USING (playerid, yearid, teamid, stint) " \
           "WHERE playerid = %s"
