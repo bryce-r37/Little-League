@@ -6,10 +6,15 @@
    {% else %}
       <title>Welcome to Little League</title>
    {% endif %}
+      <meta charset="UTF-8">
+	   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	   <link rel="stylesheet" href="static/css/style.css">
    </head>
    <body>
       <div>Little League: 
          <a href="{{ url_for('home') }}">Team Select</a>
+         <a href="{{ url_for('allPitchers') }}">All Pitchers</a>
+         <a href="{{ url_for('allBatters') }}">All Batters</a>
          {% if admin %}
             <a href="{{ url_for('admin') }}">User Queries</a>
          {% endif %}

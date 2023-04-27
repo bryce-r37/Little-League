@@ -1,14 +1,7 @@
-<!doctype html>
+{% extends "base.html" %}    
 
-<html>
-   <head>
-      <title>Home</title>
-      <meta charset="UTF-8">
-	   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	   <link rel="stylesheet" href="static/css/style.css">
-   </head>
-   <body>
-      <div class="container">
+{% block content %}
+   <div class="container">
          <h1>Home Base</h1>
          <form action="{{ url_for('home') }}" method="post">
           <label for="team">Team:</label>
@@ -45,8 +38,4 @@
           <button type="submit" name="submit">Submit</button>
         </form>
       </div>
-   </body>
-</html>
-
-
-
+{% endblock %}

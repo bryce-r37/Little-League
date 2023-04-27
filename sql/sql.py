@@ -63,18 +63,18 @@ def FetchYears(team):
     return cur.fetchall()
 
 
-def FetchTeamID(team):
-    sql = "SELECT DISTINCT teamID FROM teams WHERE team_name = %s"
-    params = [team]
+def FetchTeamID(team, yearid):
+    sql = "SELECT DISTINCT teamID FROM teams WHERE team_name = %s AND yearID = %s"
+    params = [team, yearid]
     cur.execute(sql, params)
 
     teamID = cur.fetchall()
     return str(teamID[0][0])
 
 
-def FetchTeamName(teamID):
-   sql = "SELECT DISTINCT team_name FROM teams WHERE teamid = %s"
-   params = [teamID]
+def FetchTeamName(teamID, yearid):
+   sql = "SELECT DISTINCT team_name FROM teams WHERE teamid = %s AND yearID = %s"
+   params = [teamID, yearid]
    cur.execute(sql, params)
 
    team = cur.fetchall()
@@ -154,3 +154,62 @@ def FetchPlayer(playerid):
     cur.execute(sql, params)
 
     return cur.fetchall()
+
+
+def FetchAllPitching(year):
+    sql = "SELECT playerid, concat(nameFirst, ' ', nameLast), p_G, p_GS, " \
+          "round(p_IPOuts / 3, 3), round(3 * (p_BB + p_H) / p_IPOuts, 3), " \
+          "round(p_SO / (p_IPOuts / 3), 3), round(p_ERA, 2) " \
+          "FROM pitching NATURAL JOIN people " \
+          "WHERE yearID = %s"
+    params = [year]
+
+    cur.execute(sql, params)
+
+    return cur.fetchall()
+
+
+def FetchAllBatting(year):
+    sql = "SELECT playerid, name, AVG, OBP, SLG, P, C, " \
+          "1B, 2B, 3B, SS, LF, CF, RF, OF FROM " \
+          "(SELECT playerid, concat(nameFirst, ' ', nameLast) AS name, " \
+          "teamid, yearid, round(IFNULL(b_H/b_AB, 0), 3) AS AVG, " \
+          "round(IFNULL((b_H+b_BB+b_HBP)/(b_AB+b_BB+b_HBP+b_SF), 0), 3) AS OBP, " \
+          "round(IFNULL(((b_H-b_2B-b_3B-b_HR)+(2*b_2B)+(3*b_3B)+(4*b_HR))/b_AB, 0), 3) AS SLG " \
+          "FROM batting NATURAL JOIN people " \
+          "WHERE yearid = %s AND b_AB != 0) ta " \
+          "LEFT JOIN (SELECT playerid, teamid, yearid, f_G AS 'P' FROM fielding " \
+          "WHERE position = 'P') tb USING (playerid, teamid, yearid) " \
+          "LEFT JOIN (SELECT playerid, teamid, yearid, f_G AS 'C' FROM fielding " \
+          "WHERE position = 'C') tc USING (playerid, teamid, yearid) " \
+          "LEFT JOIN (SELECT playerid, teamid, yearid, f_G AS '1B' FROM fielding " \
+          "WHERE position = '1B') td USING (playerid, teamid, yearid) " \
+          "LEFT JOIN (SELECT playerid, teamid, yearid, f_G AS '2B' FROM fielding " \
+          "WHERE position = '2B') te USING (playerid, teamid, yearid) " \
+          "LEFT JOIN (SELECT playerid, teamid, yearid, f_G AS '3B' FROM fielding " \
+          "WHERE position = '3B') tf USING (playerid, teamid, yearid) " \
+          "LEFT JOIN (SELECT playerid, teamid, yearid, f_G AS 'SS' FROM fielding " \
+          "WHERE position = 'SS') tg USING (playerid, teamid, yearid) " \
+          "LEFT JOIN (SELECT playerid, teamid, yearid, f_G AS 'LF' FROM fielding " \
+          "WHERE position = 'LF') th USING (playerid, teamid, yearid) " \
+          "LEFT JOIN (SELECT playerid, teamid, yearid, f_G AS 'CF' FROM fielding " \
+          "WHERE position = 'CF') ti USING (playerid, teamid, yearid) " \
+          "LEFT JOIN (SELECT playerid, teamid, yearid, f_G AS 'RF' FROM fielding " \
+          "WHERE position = 'RF') tj USING (playerid, teamid, yearid) " \
+          "LEFT JOIN (SELECT playerid, teamid, yearid, f_G AS 'OF' FROM fielding " \
+          "WHERE position = 'OF') tk USING (playerid, teamid, yearid)"
+
+    params = [year]
+
+    cur.execute(sql, params)
+
+    results = list(cur.fetchall())
+
+    for i in range(len(results)):
+        temp = list(results[i])
+        for j in range(len(temp)):
+            if temp[j] is None:
+                temp[j] = 0
+        results[i] = tuple(temp)
+
+    return tuple(results)

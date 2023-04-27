@@ -1,0 +1,85 @@
+{% extends "all.html" %}
+   
+{% block stats %}
+   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
+   <script type="text/javascript" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+   <div class="table-wrapper">
+   <table id="batting-table">
+      <thead>
+         <tr>
+            <th class="filterable" style="text-align: left">Player</th>
+            <th class="filterable" style="text-align: left">P</th>
+            <th class="filterable" style="text-align: left">C</th>
+            <th class="filterable" style="text-align: left">1B</th>
+            <th class="filterable" style="text-align: left">2B</th>
+            <th class="filterable" style="text-align: left">3B</th>
+            <th class="filterable" style="text-align: left">SS</th>
+            <th class="filterable" style="text-align: left">LF</th>
+            <th class="filterable" style="text-align: left">CF</th>
+            <th class="filterable" style="text-align: left">RF</th>
+            <th class="filterable" style="text-align: left">OF</th>
+            <th class="filterable" style="text-align: left">AVG</th>
+            <th class="filterable" style="text-align: left">OBP</th>
+            <th class="filterable" style="text-align: left">SLG</th>
+         </tr>
+      </thead>
+      <tbody>
+         {% for player in players %}
+         <tr>
+            <td>
+               <a href="{{ url_for('player', playerid=player[0]) }}">
+                  <b>{{ player[1] }}</b>
+               </a>
+            </td>
+            <td>{{ player[5] }}</td>
+            <td>{{ player[6] }}</td>
+            <td>{{ player[7] }}</td>
+            <td>{{ player[8] }}</td>
+            <td>{{ player[9] }}</td>
+            <td>{{ player[10] }}</td>
+            <td>{{ player[11] }}</td>
+            <td>{{ player[12] }}</td>
+            <td>{{ player[13] }}</td>
+            <td>{{ player[14] }}</td>
+            <td>{{ player[2] }}</td>
+            <td>{{ player[3] }}</td>
+            <td>{{ player[4] }}</td>
+         </tr>
+         {% endfor %}
+      </tbody>
+   </table>
+   </div>
+   <style>
+      #batting-table th {
+         font-weight: bold;
+         background-color: lightblue;
+         border: 5px black;
+      }
+      #batting-table td {
+         text-align: left;
+      }
+      #batting-table td, #batting-table th {
+         border: 1px solid #afafaf;
+         padding: 8px;
+      }
+      .dataTables_filter input {
+         padding: 10px;
+      }
+   </style>
+   <script type="text/javascript" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" defer>
+      $(document).ready(function() {
+         $('#batting-table').DataTable({
+            "paging":   false,
+            "ordering": true,
+            "info":     false,
+            "searching": true,
+            "columnDefs": [
+               { width: "5%", "targets": 0, "searchable": true},
+                {width: "5%", targets: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13] }
+            ]
+         });
+      });
+   </script>
+{% endblock %}
