@@ -4,12 +4,15 @@
    <div class="container">
          <h1>Home Base</h1>
          <form action="{{ url_for('home') }}" method="post">
+        <div class="teams">
           <label for="team">Team:</label>
-          <select id="team" name="team" onchange="getYears(this.value)">
+          <select id="team" name="team" class="dropdown" onchange="getYears(this.value)">
               {% for team in teams %}
                 <option value="{{ team[0] }}">{{ team[0] }}</option>
               {% endfor %}
           </select>
+        </div>
+        <div class="years">
           <script>
         function getYears(team) {
           var xhr = new XMLHttpRequest();
@@ -34,8 +37,9 @@
         getYears(document.getElementById('team').value)
         </script>
           <label for="year">Year:</label>
-          <select id="year" name="year"></select><br><br>
-          <button type="submit" name="submit">Submit</button>
+          <select id="year" name="year" class="dropdown"></select><br><br>
         </form>
+        <button type="submit" name="submit" class="button">Submit</button>
       </div>
+    </div>
 {% endblock %}

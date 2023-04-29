@@ -5,70 +5,50 @@
    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
    <script type="text/javascript" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
-   <div class="table-wrapper">
-   <table id="pitching-table">
-      <thead>
-           <tr>
-              <th class="filterable" style="text-align: left">Player</th>
-              <th class="filterable" style="text-align: left">G</th>
-              <th class="filterable" style="text-align: left">GS</th>
-              <th class="filterable" style="text-align: left">IP</th>
-              <th class="filterable" style="text-align: left">WHIP</th>
-              <th class="filterable" style="text-align: left">SO/9</th>
-              <th class="filterable" style="text-align: left">ERA</th>
-           </tr>
-      </thead>
-      <tbody>
-         {% for player in players %}
-         <tr>
-            <td>
-               <a href="{{ url_for('player', playerid=player[0]) }}">
-                  <b>{{ player[1] }}</b>
-               </a>
-            </td>
-            <td>{{ player[2] }}</td>
-            <td>{{ player[3] }}</td>
-            <td>{{ player[4] }}</td>
-            <td>{{ player[5] }}</td>
-            <td>{{ player[6] }}</td>
-            <td>{{ player[7] }}</td>
-         </tr>
-         {% endfor %}
-      </tbody>
-   </table>
-   </div>
-   <style>
 
-      #pitching-table th {
-         font-weight: bold;
-         background-color: lightblue;
-         border: 5px black;
-      }
-      #pitching-table td {
-         text-align: left;
-      }
-      #pitching-table td, #pitching-table th {
-         border: 1px solid #afafaf;
-         padding: 8px;
-      }
-      .dataTables_filter input {
-         padding: 10px;
-      }
-   </style>
-   <script type="text/javascript" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
-   <script type="text/javascript" defer>
+   <div class="pitching-wrapper">
+      <div class="search-box">
+         <label for="pitching-search">Search:</label>
+         <input type="text" id="pitching-search" class="form-control">
+      </div>
+      <table id="pitching-table">
+         <thead>
+            <tr>
+               <th class="filterable" style="text-align: left">Player</th>
+               <th class="filterable" style="text-align: left">G</th>
+               <th class="filterable" style="text-align: left">GS</th>
+               <th class="filterable" style="text-align: left">IP</th>
+               <th class="filterable" style="text-align: left">WHIP</th>
+               <th class="filterable" style="text-align: left">SO/9</th>
+               <th class="filterable" style="text-align: left">ERA</th>
+            </tr>
+         </thead>
+         <tbody>
+            {% for player in players %}
+            <tr>
+               <td>
+                  <a href="{{ url_for('player', playerid=player[0]) }}">
+                     <b>{{ player[1] }}</b>
+                  </a>
+               </td>
+               <td>{{ player[2] }}</td>
+               <td>{{ player[3] }}</td>
+               <td>{{ player[4] }}</td>
+               <td>{{ player[5] }}</td>
+               <td>{{ player[6] }}</td>
+               <td>{{ player[7] }}</td>
+            </tr>
+            {% endfor %}
+         </tbody>
+      </table>
+   </div>
+   <script>
       $(document).ready(function() {
-         $('#pitching-table').DataTable({
-            "paging":   false,
-            "ordering": true,
-            "info":     false,
-            "searching": true,
-            "columnDefs": [
-               { "width": "10%", "targets": 0, "searchable": true},
-                {width: "10%", targets: [1, 2, 3, 4, 5] }
-            ]
+         var table = $('#pitching-table').DataTable();
+
+         $('#pitching-search').on('keyup', function() {
+            table.search($(this).val()).draw();
          });
       });
    </script>
 {% endblock %}
-
