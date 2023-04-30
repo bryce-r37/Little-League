@@ -65,14 +65,14 @@ def createAccount():
 def pitching(teamID, year):
     name = FetchTeamName(teamID, year)
     return render_template('pitching.html', title='Team Stats', team=teamID, year=year,
-                           name=name, players=FetchPitching(teamID, year))
+                           name=name, page="Pitching", players=FetchPitching(teamID, year))
 
 
 @app.route('/stats/<teamID>/<year>/batting')
 def batting(teamID, year):
     name = FetchTeamName(teamID, year)
     return render_template('batting.html', title='Team Stats', team=teamID, year=year,
-                           name=name, players=FetchBatting(teamID, year))
+                           name=name, page="Batting", players=FetchBatting(teamID, year))
 
 
 @app.route('/player/<playerid>')
