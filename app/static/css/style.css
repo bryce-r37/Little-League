@@ -179,6 +179,34 @@ label {
 }
 
 .page-bar {
-  margin: 10px;
+  margin-bottom: 0px;
+  background-color: #ffffff;
 }
 
+.app-title {   
+    margin-left: 25px;
+    margin-top: 5px;
+    font-size: 20px;
+    margin-right: 10px;
+}
+
+.page-tab {
+    margin: 0px;
+    margin-top: 10px;
+    padding: 5px;
+    background-color: #e0feff;
+    color: #000;
+    border: round;
+    border-style: solid solid none solid;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.page-tab:hover {
+    background-color: #d0feff;
+}
+
+.tab-base {
+    margin-top: 0px;
+}

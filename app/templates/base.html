@@ -11,15 +11,16 @@
 	<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
    </head>
    <body>
-      <div class="page-bar">Little League: 
-         <a href="{{ url_for('home') }}">Team Select</a>
-         <a href="{{ url_for('allPitchers') }}">All Pitchers</a>
-         <a href="{{ url_for('allBatters') }}">All Batters</a>
+      <div class="page-bar">
+         <b class="app-title">Little League </b>
+         <a href="{{ url_for('home') }}"><button class="page-tab">Team Select</button></a>
+         <a href="{{ url_for('allPitchers') }}"><button class="page-tab">All Pitchers</button></a>
+         <a href="{{ url_for('allBatters') }}"><button class="page-tab">All Batters</button></a>
          {% if admin %}
-            <a href="{{ url_for('admin') }}">User Queries</a>
+            <a href="{{ url_for('admin') }}"><button class="page-tab">User Queries</button></a>
          {% endif %}
       </div>
-      <hr>
+      <hr class="tab-base">
       {% block content %}{% endblock %}
    </body>
 </html>
