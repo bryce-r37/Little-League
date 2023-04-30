@@ -1,8 +1,21 @@
 {% extends "base.html" %}
 
 {% block content %}
-   <h1>{{ title }}</h1>
-   <h3>Someone please add a year dropdown here I don't understand it.</h3>
+   <h1 class="allPlayers">{{ title }}</h1>
+   
+   <form action="{{ url_for('home') }}" method="post">
+   <div class="all">
+      <h2>Someone still has to make this dropdown actually work</h2>
+      <div class="allYears">
+        <label for="year">Year:</label>
+        <select id="year" name="year" class="dropdown" onchange="getYears(this.value)">
+            {% for year in years %}
+              <option value="{{ year[0] }}">{{ year[0] }}</option>
+            {% endfor %}
+        </select>
+      </div>
+      <button type="submit" name="submit" class="buttonAll">Submit</button>
+   </div>
    <hr>
    {% block stats %}{% endblock %}
 {% endblock %}

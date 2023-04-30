@@ -55,6 +55,10 @@ def FetchTeams():
     cur.execute(sql)
     return cur.fetchall()
 
+def FetchAllYears():
+    sql = "SELECT DISTINCT yearID FROM teams"
+    cur.execute(sql)
+    return cur.fetchall()
 
 def FetchYears(team):
     sql = "SELECT yearID FROM teams WHERE team_name = %s"

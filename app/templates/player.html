@@ -1,12 +1,13 @@
 {% extends "base.html" %}
 
 {% block content %}
-   <h2>{{ stints[0][0] }}</h2>
+   
+   <h2 class="stint">{{ stints[0][0] }}</h2>
    {% for stint in stints %}
       <a href="{{ url_for('pitching', teamID=stint[8], year=stint[2]) }}">
-         <h3>{{ stint[1] }} - {{ stint[2] }} Season</h3>
+         <h3 class="players">{{ stint[1] }} - {{ stint[2] }} Season</h3>
       </a>
-      <table>
+      <table class="player-table">
          <tr>
             <th>Games</th>
             <th>AVG</th>
