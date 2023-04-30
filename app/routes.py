@@ -85,14 +85,14 @@ def player(playerid):
 def allPitchers():
    year = 2021
    players = FetchAllPitching(year)
-   return render_template('allPitchers.html', title='Pitching', players=players)
+   return render_template('allPitchers.html', title1='All Pitchers', players=players)
 
 
 @app.route('/batters')
 def allBatters():
    year = 2021
    players = FetchAllBatting(year)
-   return render_template('allBatters.html', title='Batting', players=players)
+   return render_template('allBatters.html', title='All Batters', players=players)
 
 
 @app.route('/admin')

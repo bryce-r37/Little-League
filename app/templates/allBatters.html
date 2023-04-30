@@ -1,10 +1,15 @@
 {% extends "all.html" %}
    
 {% block stats %}
+   <h2>Batting</h2>
    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
    <script type="text/javascript" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
-   <div class="table-wrapper">
+   <div class="batting-wrapper">
+      <div class="search-box">
+         <label for="batting-search">Search:</label>
+         <input type="text" id="batting-search" class="form-control">
+      </div>
    <table id="batting-table">
       <thead>
          <tr>
@@ -50,36 +55,14 @@
       </tbody>
    </table>
    </div>
-   <style>
-      #batting-table th {
-         font-weight: bold;
-         background-color: lightblue;
-         border: 5px black;
-      }
-      #batting-table td {
-         text-align: left;
-      }
-      #batting-table td, #batting-table th {
-         border: 1px solid #afafaf;
-         padding: 8px;
-      }
-      .dataTables_filter input {
-         padding: 10px;
-      }
-   </style>
-   <script type="text/javascript" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" defer>
-      $(document).ready(function() {
-         $('#batting-table').DataTable({
-            "paging":   false,
-            "ordering": true,
-            "info":     false,
-            "searching": true,
-            "columnDefs": [
-               { width: "5%", "targets": 0, "searchable": true},
-                {width: "5%", targets: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13] }
-            ]
-         });
+
+<script>
+   $(document).ready(function() {
+      var table = $('#batting-table').DataTable();
+
+      $('#batting-search').on('keyup', function() {
+         table.search($(this).val()).draw();
       });
-   </script>
+   });
+</script>
 {% endblock %}
