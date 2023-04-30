@@ -11,7 +11,7 @@ from app.models import User
 
 from sql import sql
 from sql.sql import ValidateLogin, CreateAccount, FetchPitching, FetchBatting, \
-        FetchPlayer, FetchTeams, FetchYears, FetchTeamID, FetchTeamName, \
+        FetchPlayer, FetchTeams, FetchYears, FetchAllYears, FetchTeamID, FetchTeamName, \
         FetchAllPitching, FetchAllBatting
 
 
@@ -91,17 +91,19 @@ def player(playerid):
 @app.route('/pitchers')
 @login_required
 def allPitchers():
+   allYears = FetchAllYears()
    year = 2021
    players = FetchAllPitching(year)
-   return render_template('allPitchers.html', title1='All Pitchers', players=players)
+   return render_template('allPitchers.html', title='All Pitchers', players=players, years=allYears)
 
 
 @app.route('/batters')
 @login_required
 def allBatters():
+   allYears = FetchAllYears()
    year = 2021
    players = FetchAllBatting(year)
-   return render_template('allBatters.html', title='All Batters', players=players)
+   return render_template('allBatters.html', title='All Batters', players=players, years=allYears)
 
 
 @app.route('/admin')
