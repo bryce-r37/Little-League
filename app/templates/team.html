@@ -1,8 +1,8 @@
 {% extends "base.html" %}
 
 {% block content %}
-   <h1>{{ name }} - {{ year }} Season</h1>
-   <div>Statistics: 
+   <h1 class="teamAndYear">{{ name }} - {{ year }} Season</h1>
+   <div class="stats">Statistics: 
       <a href="{{ url_for('pitching', teamID=team, year=year) }}">Pitching</a>
       <a href="{{ url_for('batting', teamID=team, year=year) }}">Batting</a>
    </div>

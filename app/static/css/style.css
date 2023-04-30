@@ -23,6 +23,10 @@ h1 {
   margin-top: 0; /* remove default margin */
 }
 
+h2 {
+  margin-left: 25px;
+}
+
 .button-container {
   margin-top: 20px;
   display: flex;
@@ -77,7 +81,7 @@ label {
   margin-bottom: 25px;
   margin-left: 25px;
   margin-right: 25px;
-  width: 100%;
+  width: 97%;
   position: relative;
   border-radius: 5px;
 }
@@ -138,4 +142,59 @@ label {
 
 .dropdown {
   width: 200px;
+}
+
+.base {
+  margin-left: 5px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.stats {
+  margin-left: 25px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.teamAndYear {
+  margin-left: 25px;
+}
+
+.allPlayers {
+  margin-left: 25px;
+}
+
+.allYears {
+  margin-left: 25px;
+}
+
+.buttonAll {
+  margin-left: 25px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding: 5px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.buttonAll:hover {
+  background-color: #0062cc;
+}
+
+.players {
+  margin-left: 25px;
+}
+
+.player-table {
+  margin-left: 25px;
+  border-radius: 5px;
+  box-shadow: 0px 10px 30px 5px rgba(0, 0, 0, 0.1);
+  table-layout: auto;
+}
+
+.stint {
+  margin-left: 25px;
 }
