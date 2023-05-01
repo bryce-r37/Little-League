@@ -28,6 +28,7 @@ def home():
     if request.method == 'POST':
         team = request.form.get('team')
         year = request.form.get('year')
+        print(team)
         team = FetchTeamID(team, year)
         return redirect(url_for('pitching', teamID=team, year=year))
     return render_template('home.html', title='Team Select', teams=teams)

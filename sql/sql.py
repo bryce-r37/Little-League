@@ -55,10 +55,12 @@ def FetchTeams():
     cur.execute(sql)
     return cur.fetchall()
 
+
 def FetchAllYears():
     sql = "SELECT DISTINCT yearID FROM teams"
     cur.execute(sql)
     return cur.fetchall()
+
 
 def FetchYears(team):
     sql = "SELECT yearID FROM teams WHERE team_name = %s"
@@ -73,16 +75,17 @@ def FetchTeamID(team, yearid):
     cur.execute(sql, params)
 
     teamID = cur.fetchall()
+    print(teamID)
     return str(teamID[0][0])
 
 
 def FetchTeamName(teamID, yearid):
-   sql = "SELECT DISTINCT team_name FROM teams WHERE teamid = %s AND yearID = %s"
-   params = [teamID, yearid]
-   cur.execute(sql, params)
+    sql = "SELECT DISTINCT team_name FROM teams WHERE teamid = %s AND yearID = %s"
+    params = [teamID, yearid]
+    cur.execute(sql, params)
 
-   team = cur.fetchall()
-   return str(team[0][0])
+    team = cur.fetchall()
+    return str(team[0][0])
 
 
 def FetchPitching(team, year):
