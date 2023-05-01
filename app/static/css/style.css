@@ -53,8 +53,7 @@ label {
   text-align: left;
 }
 
-
-.pitching-wrapper {
+.table-wrapper {
   background-color: #fff;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
   margin-bottom: 25px;
@@ -65,32 +64,12 @@ label {
   border-radius: 0px 5px 5px 5px;
 }
 
-.pitching-table {
+.table {
   border-radius: 5px;
   box-shadow: 0px 10px 30px 5px rgba(0, 0, 0, 0.1);
   margin: 25px auto;
   table-layout: auto;
 }
-
-.batting-wrapper {
-  background-color: #fff;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
-  margin-bottom: 25px;
-  margin-left: 25px;
-  margin-right: 25px;
-  width: 97%;
-  position: relative;
-  border-radius: 0px 5px 5px 5px;
-}
-
-.batting-table {
-  border-radius: 5px;
-  box-shadow: 0px 10px 30px 5px rgba(0, 0, 0, 0.1);
-  margin: 25px auto;
-  table-layout: auto;
-}
-
-
 
  .table-header {
 /*    display: flex;                */
@@ -212,4 +191,23 @@ label {
 
 .tab-base {
     margin-top: 0px;
+}
+
+.logout-button {
+    margin: 0px;
+    margin-top: 10px;
+    padding: 5px;
+    background-color: #ffffff;
+    color: #000;
+    border: round;
+    border-style: solid solid none solid;
+    border-radius: 10px 10px 0px 0px;
+    cursor: pointer;
+    font-size: 16px;
+    position: absolute;
+    right: 25px;
+}
+
+.logout-button:hover {
+    background-color: #e0f0ff;
 }

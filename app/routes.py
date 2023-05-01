@@ -3,10 +3,11 @@
 # date: 4/18/23
 
 from flask import render_template, flash, redirect, url_for, jsonify, request
-from flask_login import current_user
+from flask_login import current_user, login_user, login_required, logout_user
 
-from app import app
+from app import app, login
 from app.forms import LoginForm, CreateAccountForm
+from app.models import User
 
 from sql import sql
 from sql.sql import ValidateLogin, CreateAccount, FetchPitching, FetchBatting, \
@@ -21,6 +22,7 @@ def index():
 
 
 @app.route('/teams', methods=['GET', 'POST'])
+@login_required
 def home():
     teams = FetchTeams()
     if request.method == 'POST':
@@ -32,6 +34,7 @@ def home():
 
 
 @app.route('/years/<team>')
+@login_required
 def years(team):
     teamYears = FetchYears(team)
     return jsonify(teamYears)
@@ -43,9 +46,10 @@ def login():
     if form.validate_on_submit():
         message = ValidateLogin(form)
         if message == "Success":
+            user = User(username=form.email.data)
+            login_user(user)
             return redirect(url_for('home'))
-        else:
-            return render_template('login.html', form=form, message=message)
+        return render_template('login.html', form=form, message=message)
     return render_template('login.html', form=form)
 
 
@@ -62,6 +66,7 @@ def createAccount():
 
 
 @app.route('/stats/<teamID>/<year>/pitching')
+@login_required
 def pitching(teamID, year):
     name = FetchTeamName(teamID, year)
     return render_template('pitching.html', title='Team Stats', team=teamID, year=year,
@@ -69,6 +74,7 @@ def pitching(teamID, year):
 
 
 @app.route('/stats/<teamID>/<year>/batting')
+@login_required
 def batting(teamID, year):
     name = FetchTeamName(teamID, year)
     return render_template('batting.html', title='Team Stats', team=teamID, year=year,
@@ -76,12 +82,14 @@ def batting(teamID, year):
 
 
 @app.route('/player/<playerid>')
+@login_required
 def player(playerid):
     return render_template('player.html', title='Player Stats',
                            stints=FetchPlayer(playerid))
 
 
 @app.route('/pitchers')
+@login_required
 def allPitchers():
    year = 2021
    players = FetchAllPitching(year)
@@ -89,6 +97,7 @@ def allPitchers():
 
 
 @app.route('/batters')
+@login_required
 def allBatters():
    year = 2021
    players = FetchAllBatting(year)
@@ -96,5 +105,12 @@ def allBatters():
 
 
 @app.route('/admin')
+@login_required
 def admin():
    return render_template('admin.html')
+
+
+@app.route('/logout')
+def logout():
+    logout_user()
+    return redirect(url_for('index'))
