@@ -12,7 +12,7 @@ from app.models import User
 from sql import sql
 from sql.sql import ValidateLogin, CreateAccount, FetchPitching, FetchBatting, \
         FetchPlayer, FetchTeams, FetchYears, FetchAllYears, FetchTeamID, FetchTeamName, \
-        FetchAllPitching, FetchAllBatting
+        FetchAllPitching, FetchAllBatting, FetchUser
 
 
 @app.route('/index')
@@ -46,7 +46,8 @@ def login():
     if form.validate_on_submit():
         message = ValidateLogin(form)
         if message == "Success":
-            user = User(username=form.email.data)
+            user = FetchUser(form.email.data)
+            user = User(user[0], user[1])
             login_user(user)
             return redirect(url_for('home'))
         return render_template('login.html', form=form, message=message)
