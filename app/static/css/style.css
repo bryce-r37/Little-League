@@ -113,18 +113,20 @@ label {
   display: none;
  }
 
+ .dataTables_info {
+     margin-left: 10px;
+ }
+
+ .dataTables_length {
+     margin-left: 10px;
+ }
+
 .search-box {
   display: flex;
   align-items: center;
   border-radius: 5px;
-  position: absolute;
-  top: -60px;
-  left: 50%;
-  transform: translateX(-50%);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   background-color: white;
   padding: 10px;
-  margin-bottom: 25px;
 }
 
 .search-box input {
