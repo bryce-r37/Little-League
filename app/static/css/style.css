@@ -62,7 +62,7 @@ label {
   margin-right: 25px;
   width: 97%;
   position: relative;
-  border-radius: 5px;
+  border-radius: 0px 5px 5px 5px;
 }
 
 .pitching-table {
@@ -80,7 +80,7 @@ label {
   margin-right: 25px;
   width: 97%;
   position: relative;
-  border-radius: 5px;
+  border-radius: 0px 5px 5px 5px;
 }
 
 .batting-table {
@@ -151,7 +151,7 @@ label {
   color: #000;
   border: round;
   border-style: solid solid none solid;
-  border-radius: 10px;
+  border-radius: 10px 10px 0px 0px;
   cursor: pointer;     
   font-size: 24px;
   position: relative;
@@ -165,7 +165,8 @@ label {
   color: #000;
   border: round;
   border-style: solid solid none solid;
-  border-radius: 10px;
+  border-color: #ffffff;
+  border-radius: 10px 10px 0px 0px;
   cursor: normal;
   font-size: 24px;
   position: relative;
@@ -200,7 +201,7 @@ label {
     color: #000;
     border: round;
     border-style: solid solid none solid;
-    border-radius: 10px;
+    border-radius: 10px 10px 0px 0px;
     cursor: pointer;
     font-size: 16px;
 }

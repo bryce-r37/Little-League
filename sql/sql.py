@@ -96,9 +96,9 @@ def FetchPitching(team, year):
 
 def FetchBatting(team, year):
     sql = "SELECT playerid, name, AVG, OBP, SLG, P, C, " \
-          "1B, 2B, 3B, SS, LF, CF, RF, OF FROM " \
+          "1B, 2B, 3B, SS, LF, CF, RF, OF, AB FROM " \
           "(SELECT playerid, concat(nameFirst, ' ', nameLast) AS name, " \
-          "teamid, yearid, round(IFNULL(b_H/b_AB, 0), 3) AS AVG, " \
+          "teamid, yearid, round(IFNULL(b_H/b_AB, 0), 3) AS AVG, b_AB as AB, " \
           "round(IFNULL((b_H+b_BB+b_HBP)/(b_AB+b_BB+b_HBP+b_SF), 0), 3) AS OBP, " \
           "round(IFNULL(((b_H-b_2B-b_3B-b_HR)+(2*b_2B)+(3*b_3B)+(4*b_HR))/b_AB, 0), 3) AS SLG " \
           "FROM batting NATURAL JOIN people " \
@@ -171,8 +171,8 @@ def FetchAllPitching(year):
 
 def FetchAllBatting(year):
     sql = "SELECT playerid, name, AVG, OBP, SLG, sum(P), sum(C), " \
-          "sum(1B), sum(2B), sum(3B), sum(SS), sum(LF), sum(CF), sum(RF), sum(OF) FROM " \
-          "(SELECT playerid, concat(nameFirst, ' ', nameLast) AS name, " \
+          "sum(1B), sum(2B), sum(3B), sum(SS), sum(LF), sum(CF), sum(RF), sum(OF), sum(AB) FROM " \
+          "(SELECT playerid, concat(nameFirst, ' ', nameLast) AS name, sum(b_AB) AS AB, " \
           "teamid, yearid, round(IFNULL(sum(b_H)/sum(b_AB), 0), 3) AS AVG, " \
           "round(IFNULL((sum(b_H)+sum(b_BB)+sum(b_HBP))/(sum(b_AB)+sum(b_BB)+" \
           "sum(b_HBP)+sum(b_SF)), 0), 3) AS OBP, " \
