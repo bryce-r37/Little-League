@@ -2,8 +2,8 @@
 
 {% block content %}
    <div class="table-header">
-      <h1 class="teamAndYear">{{ name }} - {{ year }} Season</h1>
-      <div class="stats">
+      <h1>{{ name }} - {{ year }} Season</h1>
+      <div>
          {% if page  == "Pitching" %}
          <button class="stat-tab-selected">Pitching</button>
          <a href="{{ url_for('batting', teamID=team, year=year) }}"><button class="stat-tab">Batting</button></a>
