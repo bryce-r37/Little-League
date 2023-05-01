@@ -6,18 +6,24 @@
    {% else %}
       <title>Welcome to Little League</title>
    {% endif %}
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
    </head>
-   <body class="base">
-      <div class="page-bar">Little League: 
-         <a href="{{ url_for('home') }}">Team Select</a>
-         <a href="{{ url_for('allPitchers') }}">All Pitchers</a>
-         <a href="{{ url_for('allBatters') }}">All Batters</a>
-         {% if admin %}
-            <a href="{{ url_for('admin') }}">User Queries</a>
+   <body>
+      <div class="page-bar">
+         {% if current_user.username == "bryce-37" %}
+            <b class="app-title">Little League Admin </b>
+         {% else %}
+            <b class="app-title">Little League </b>
          {% endif %}
+         <a href="{{ url_for('home') }}"><button class="page-tab">Team Select</button></a>
+         <a href="{{ url_for('allPitchers') }}"><button class="page-tab">All Pitchers</button></a>
+         <a href="{{ url_for('allBatters') }}"><button class="page-tab">All Batters</button></a>
+         {% if current_user.username == "bryce-37" %}
+            <a href="{{ url_for('admin') }}"><button class="page-tab">User Queries</button></a>
+         {% endif %}
+         <a href="{{ url_for('logout') }}"><button class="logout-button">Log Out</button></a>
       </div>
       <hr class="tab-base">
       {% block content %}{% endblock %}
