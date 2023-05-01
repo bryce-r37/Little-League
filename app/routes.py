@@ -15,8 +15,8 @@ from sql.sql import ValidateLogin, CreateAccount, FetchPitching, FetchBatting, \
         FetchAllPitching, FetchAllBatting
 
 
-@app.route('/')
 @app.route('/index')
+@app.route('/')
 def index():
     return render_template('index.html')
 
@@ -107,6 +107,8 @@ def allBatters():
 @app.route('/admin')
 @login_required
 def admin():
+   if current_user.username != 'bryce-37':
+      return redirect(url_for('home'))
    return render_template('admin.html')
 
 
