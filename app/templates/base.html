@@ -9,6 +9,103 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <style>
+        body {
+            {% if current_user.team == "ARI" %} 
+            background-image: url(/../static/image/diamondbacks.jpg);
+            background-size: 258px 373px;
+            {% elif current_user.team == "ATL" %}
+            background-image: url(/../static/image/braves.jpg);
+            background-size: 252px 234px;
+            {% elif current_user.team == "BAL" %}
+            background-image: url(/../static/image/orioles.jpg);
+            background-size: 332px 254px;
+            {% elif current_user.team == "BOS" %}
+            background-image: url(/../static/image/red-sox.jpg);
+            background-size: 510px 492px;
+            {% elif current_user.team == "CHA" %}
+            background-image: url(/../static/image/white-sox.jpg);
+            background-size: 270px 234px;
+            {% elif current_user.team == "CHN" %}
+            background-image: url(/../static/image/cubs.jpg);
+            background-size: 250px 214px;
+            {% elif current_user.team == "CIN" %}
+            background-image: url(/../static/image/reds.jpg);
+            background-size: 174px 206px;
+            {% elif current_user.team == "CLE" %}
+            background-image: url(/../static/image/guardians.jpg);
+            background-size: 300px 300px;
+            {% elif current_user.team == "COL" %}
+            background-image: url(/../static/image/rockies.jpg);
+            background-size: 272px 276px;
+            {% elif current_user.team == "DET" %}
+            background-image: url(/../static/image/tigers.jpg);
+            background-size: 308px 228px;
+            {% elif current_user.team == "HOU" %}
+            background-image: url(/../static/image/astros.jpg);
+            background-size: 370px 296px;
+            {% elif current_user.team == "KCA" %}
+            background-image: url(/../static/image/royals.jpg);
+            background-size: 174px 214px;
+            {% elif current_user.team == "LAA" %}
+            background-image: url(/../static/image/angels.jpg);
+            background-size: 284px 110px;
+            {% elif current_user.team == "LAN" %}
+            background-image: url(/../static/image/dodgers.jpg);
+            background-size: 304px 144px;
+            {% elif current_user.team == "MIA" %}
+            background-image: url(/../static/image/marlins.jpg);
+            background-size: 630px 630px;
+            {% elif current_user.team == "MIL" %}
+            background-image: url(/../static/image/brewers.jpg);
+            background-size: 178px 170px;
+            {% elif current_user.team == "NYA" %}
+            background-image: url(/../static/image/yankees.jpg);
+            background-size: 178px 238px;
+            {% elif current_user.team == "NYN" %}
+            background-image: url(/../static/image/mets.jpg);
+            background-size: 172px 204px;
+            {% elif current_user.team == "OAK" %}
+            background-image: url(/../static/image/athletics.jpg);
+            background-size: 264px 268px;
+            {% elif current_user.team == "PHI" %}
+            background-image: url(/../static/image/phillies.jpg);
+            background-size: 264px 276px;
+            {% elif current_user.team == "PIT" %}
+            background-image: url(/../static/image/pirates.jpg);
+            background-size: 194px 258px;
+            {% elif current_user.team == "SDN" %}
+            background-image: url(/../static/image/padres.jpg);
+            background-size: 210px 238px;
+            {% elif current_user.team == "SEA" %}
+            background-image: url(/../static/image/mariners.jpg);
+            background-size: 234px 250px;
+            {% elif current_user.team == "SFN" %}
+            background-image: url(/../static/image/giants.jpg);
+            background-size: 278px 176px;
+            {% elif current_user.team == "SLN" %}
+            background-image: url(/../static/image/cardinals.jpg);
+            background-size: 272px 246px;
+            {% elif current_user.team == "TBA" %}
+            background-image: url(/../static/image/rays.jpg);
+            background-size: 310px 322px;
+            {% elif current_user.team == "TEX" %}
+            background-image: url(/../static/image/rangers.jpg);
+            background-size: 242px 260px;
+            {% elif current_user.team == "TOR" %}
+            background-image: url(/../static/image/blue-jays.jpg);
+            background-size: 380px 323px;
+            {% elif current_user.team == "WAS" %}
+            background-image: url(/../static/image/nationals.jpg);
+            background-size: 774px 642px;
+            {% else %}
+            background-image: url(/../static/image/mlb.jpg);
+            background-size: 640px 360px;
+            {% endif %}
+        }
+    </style> 
+
    </head>
    <body>
       <div class="page-bar">
@@ -20,6 +117,7 @@
          <a href="{{ url_for('home') }}"><button class="page-tab">Team Select</button></a>
          <a href="{{ url_for('allPitchers') }}"><button class="page-tab">All Pitchers</button></a>
          <a href="{{ url_for('allBatters') }}"><button class="page-tab">All Batters</button></a>
+         <a href="{{ url_for('background') }}"><button class="page-tab">Background</button></a>
          {% if current_user.username == "bryce-37" %}
             <a href="{{ url_for('admin') }}"><button class="page-tab">User Queries</button></a>
          {% endif %}
