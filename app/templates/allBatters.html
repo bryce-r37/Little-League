@@ -1,5 +1,5 @@
 {% extends "all.html" %}
-   
+
 {% block stats %}
    <div class="table-header">
     <button class="stat-tab-selected">All Batting</button>
@@ -11,6 +11,18 @@
       <div class="search-box">
          <label for="search">Search:</label>
          <input type="text" id="search" class="form-control">
+         <div class="year-dropdown">
+            <label for="year">Year:</label>
+                <select name="year" id="year-select">
+                    {% for y in years %}
+                    {% if y == selected_year %}
+                <option value="{{ y }}" selected>{{ y }}</option>
+                    {% else %}
+                <option value="{{ y }}">{{ y }}</option>
+                {% endif %}
+                {% endfor %}
+                </select>
+      </div>
       </div>
    <table id="table">
       <thead>
@@ -66,6 +78,11 @@
 
       $('#search').on('keyup', function() {
          table.search($(this).val()).draw();
+      });
+
+      $('#year-select').on('change', function() {
+          var selectedYear = $(this).val();
+          window.location.href = '/pitchers?year=' + selectedYear;
       });
    });
 </script>

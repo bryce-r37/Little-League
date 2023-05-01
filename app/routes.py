@@ -11,8 +11,8 @@ from app.models import User
 
 from sql import sql
 from sql.sql import ValidateLogin, CreateAccount, FetchPitching, FetchBatting, \
-        FetchPlayer, FetchTeams, FetchYears, FetchAllYears, FetchTeamID, FetchTeamName, \
-        FetchAllPitching, FetchAllBatting
+    FetchPlayer, FetchTeams, FetchYears, FetchAllYears, FetchTeamID, FetchTeamName, \
+    FetchAllPitching, FetchAllBatting
 
 
 @app.route('/index')
@@ -89,30 +89,32 @@ def player(playerid):
                            stints=FetchPlayer(playerid))
 
 
-@app.route('/pitchers')
 @login_required
+@app.route('/pitchers')
 def allPitchers():
-   allYears = FetchAllYears()
-   year = 2021
-   players = FetchAllPitching(year)
-   return render_template('allPitchers.html', title='All Pitchers', players=players, years=allYears)
+    allYears = FetchAllYears()
+    allYears = sorted([str(y[0]) for y in allYears], reverse=True)
+    year = request.args.get('year', '2021')
+    players = FetchAllPitching(year)
+    return render_template('allPitchers.html', title='All Pitchers', players=players, years=allYears, selected_year=year)
 
 
 @app.route('/batters')
 @login_required
 def allBatters():
-   allYears = FetchAllYears()
-   year = 2021
-   players = FetchAllBatting(year)
-   return render_template('allBatters.html', title='All Batters', players=players, years=allYears)
+    allYears = FetchAllYears()
+    allYears = sorted([str(y[0]) for y in allYears], reverse=True)
+    year = request.args.get('year', '2021')
+    players = FetchAllBatting(year)
+    return render_template('allBatters.html', title='All Batters', players=players, years=allYears)
 
 
 @app.route('/admin')
 @login_required
 def admin():
-   if current_user.username != 'bryce-37':
-      return redirect(url_for('home'))
-   return render_template('admin.html')
+    if current_user.username != 'bryce-37':
+        return redirect(url_for('home'))
+    return render_template('admin.html')
 
 
 @app.route('/logout')

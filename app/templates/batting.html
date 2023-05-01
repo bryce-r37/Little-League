@@ -57,7 +57,7 @@
       </tbody>
    </table>
    </div>
-   
+
    <script>
       $(document).ready(function() {
          var table = $('#table').DataTable();
@@ -65,6 +65,7 @@
          $('#search').on('keyup', function() {
             table.search($(this).val()).draw();
          });
+
       });
    </script>
 {% endblock %}
