@@ -32,6 +32,15 @@ def ValidateLogin(form):
         return "Email/Username not found."
 
 
+def FetchUser(user):
+    sql = "SELECT username, team FROM user WHERE email = %s OR username = %s"
+
+    params = [user, user]
+    cur.execute(sql, params)
+
+    return cur.fetchone()
+
+
 def CreateAccount(form):
     sql = "INSERT INTO user (email, username, name, password) VALUES (%s, %s, %s, %s)"
     passwordHash = generate_password_hash(form.password.data)

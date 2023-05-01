@@ -109,6 +109,12 @@ def allBatters():
     return render_template('allBatters.html', title='All Batters', players=players, years=allYears)
 
 
+@app.route('/background')
+@login_required
+def background():
+    return render_template('background.html', title='Background')
+
+
 @app.route('/admin')
 @login_required
 def admin():
