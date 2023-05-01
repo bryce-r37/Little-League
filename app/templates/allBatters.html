@@ -1,16 +1,18 @@
 {% extends "all.html" %}
    
 {% block stats %}
-   <h2>Batting</h2>
+   <div class="table-header">
+    <button class="stat-tab-selected">All Batting</button>
+   </div>
    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
    <script type="text/javascript" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
-   <div class="batting-wrapper">
+   <div class="table-wrapper">
       <div class="search-box">
-         <label for="batting-search">Search:</label>
-         <input type="text" id="batting-search" class="form-control">
+         <label for="search">Search:</label>
+         <input type="text" id="search" class="form-control">
       </div>
-   <table id="batting-table">
+   <table id="table">
       <thead>
          <tr>
             <th class="filterable" style="text-align: left">Player</th>
@@ -24,6 +26,7 @@
             <th class="filterable" style="text-align: left">CF</th>
             <th class="filterable" style="text-align: left">RF</th>
             <th class="filterable" style="text-align: left">OF</th>
+            <th class="filterable" style="text-aligh: left">AB</th>
             <th class="filterable" style="text-align: left">AVG</th>
             <th class="filterable" style="text-align: left">OBP</th>
             <th class="filterable" style="text-align: left">SLG</th>
@@ -47,6 +50,7 @@
             <td>{{ player[12] }}</td>
             <td>{{ player[13] }}</td>
             <td>{{ player[14] }}</td>
+            <td>{{ player[15] }}</td>
             <td>{{ player[2] }}</td>
             <td>{{ player[3] }}</td>
             <td>{{ player[4] }}</td>
@@ -58,9 +62,9 @@
 
 <script>
    $(document).ready(function() {
-      var table = $('#batting-table').DataTable();
+      var table = $('#table').DataTable();
 
-      $('#batting-search').on('keyup', function() {
+      $('#search').on('keyup', function() {
          table.search($(this).val()).draw();
       });
    });
