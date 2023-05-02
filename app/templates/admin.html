@@ -1,8 +1,8 @@
 {% extends "base.html" %}
 {% block content %}
-    <h1>Total Requests: {{ requests }}</h1>
-    <hr />
-    <h2>Dropdown menu again? Like for users?</h2>
+    <div class="table-header">
+        <button class="stat-tab-selected">Total Requests: {{ requests }}</button>
+    </div>
     <div class="table-wrapper">
       <div class="search-box">
          <label for="search">Search:</label>
