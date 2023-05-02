@@ -2,7 +2,7 @@
 # authors: Bryce Robinson, Carson Buntin
 # date: 4/18/23
 
-from flask import render_template, flash, redirect, url_for, jsonify, request
+from flask import render_template, flash, redirect, url_for, jsonify, request, make_response
 from flask_login import current_user, login_user, login_required, logout_user
 
 from app import app, login
@@ -11,8 +11,8 @@ from app.models import User
 
 from sql import sql
 from sql.sql import ValidateLogin, CreateAccount, FetchPitching, FetchBatting, \
-        FetchPlayer, FetchTeams, FetchYears, FetchAllYears, FetchTeamID, FetchTeamName, \
-        FetchAllPitching, FetchAllBatting, FetchUser
+    FetchPlayer, FetchTeams, FetchYears, FetchAllYears, FetchTeamID, FetchTeamName, \
+    FetchAllPitching, FetchAllBatting, FetchUser, FetchCurrentTeams, ChangeBackRound
 
 
 @app.route('/index')
@@ -28,7 +28,6 @@ def home():
     if request.method == 'POST':
         team = request.form.get('team')
         year = request.form.get('year')
-        print(team)
         team = FetchTeamID(team, year)
         return redirect(url_for('pitching', teamID=team, year=year))
     return render_template('home.html', title='Team Select', teams=teams)
@@ -97,7 +96,8 @@ def allPitchers():
     allYears = sorted([str(y[0]) for y in allYears], reverse=True)
     year = request.args.get('year', '2021')
     players = FetchAllPitching(year)
-    return render_template('allPitchers.html', title='All Pitchers', players=players, years=allYears, selected_year=year)
+    return render_template('allPitchers.html', title='All Pitchers', players=players, years=allYears,
+                           selected_year=year)
 
 
 @app.route('/batters')
@@ -113,7 +113,8 @@ def allBatters():
 @app.route('/background')
 @login_required
 def background():
-    return render_template('background.html', title='Background')
+    currentTeams = FetchCurrentTeams("2021")
+    return render_template('background.html', title='Background', teams=currentTeams)
 
 
 @app.route('/admin')
@@ -128,3 +129,12 @@ def admin():
 def logout():
     logout_user()
     return redirect(url_for('index'))
+
+
+@app.route('/update-team/<team>', methods=['GET'])
+def update_team(team):
+    result = ChangeBackRound(team)
+
+    print(result)
+
+    return redirect(url_for('background'))

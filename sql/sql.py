@@ -3,6 +3,7 @@
 # date: 4/24/23
 
 import pymysql
+from flask_login import current_user
 from pymysql import IntegrityError
 from werkzeug.security import generate_password_hash, check_password_hash
 from csi3335sp2023 import mysql
@@ -95,6 +96,22 @@ def FetchTeamName(teamID, yearid):
 
     team = cur.fetchall()
     return str(team[0][0])
+
+
+def FetchCurrentTeams(yearID):
+    sql = "SELECT DISTINCT team_name from teams WHERE yearID = %s"
+    params = [yearID]
+    cur.execute(sql, params)
+
+    teams = cur.fetchall()
+    return teams
+
+
+def ChangeBackRound(team):
+    sql = "UPDATE user SET team = (SELECT DISTINCT teamID FROM teams WHERE team_Name = %s AND yearID = 2021) WHERE username = %s"
+    params = [team, current_user.username]
+    cur.execute(sql, params)
+    return cur.fetchall()
 
 
 def FetchPitching(team, year):

@@ -1,6 +1,18 @@
 {% extends "base.html" %}
 
 {% block content %}
+   <div class="container">
+        <h1>Background Select</h1>
+        <div class="teams">
+          <label for="team">Select your favorite team:</label>
+           <select id="team" name="team" class="dropdown" onchange="window.location.href='{{ url_for('update_team', team='') }}' + document.getElementById('team').value">
+
+              {% for team in teams %}
+                <option value="{{ team[0] }}">{{ team[0] }}</option>
+              {% endfor %}
+          </select>
+        </div>
+   </div>
 
 
 {% endblock %}
