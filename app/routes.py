@@ -12,7 +12,7 @@ from app.models import User
 from sql import sql
 from sql.sql import ValidateLogin, CreateAccount, FetchPitching, FetchBatting, \
     FetchPlayer, FetchTeams, FetchYears, FetchAllYears, FetchTeamID, FetchTeamName, \
-    FetchAllPitching, FetchAllBatting, FetchUser, FetchCurrentTeams, ChangeBackRound
+    FetchAllPitching, FetchAllBatting, FetchUser, FetchCurrentTeams, ChangeBackground
 
 
 @app.route('/index')
@@ -133,8 +133,6 @@ def logout():
 
 @app.route('/update-team/<team>', methods=['GET'])
 def update_team(team):
-    result = ChangeBackRound(team)
-
-    print(result)
+    result = ChangeBackground(team=team, user=current_user.username)
 
     return redirect(url_for('background'))
