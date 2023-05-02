@@ -36,6 +36,7 @@ def home():
 @app.route('/years/<team>')
 @login_required
 def years(team):
+    team = team.replace('-', '/')
     teamYears = FetchYears(team)
     return jsonify(teamYears)
 
@@ -107,7 +108,8 @@ def allBatters():
     allYears = sorted([str(y[0]) for y in allYears], reverse=True)
     year = request.args.get('year', '2021')
     players = FetchAllBatting(year)
-    return render_template('allBatters.html', title='All Batters', players=players, years=allYears)
+    return render_template('allBatters.html', title='All Batters', players=players, years=allYears, 
+                           selected_year=year)
 
 
 @app.route('/background')

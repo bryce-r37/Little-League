@@ -16,6 +16,7 @@
           <script>
         function getYears(team) {
           var xhr = new XMLHttpRequest();
+          team = team.replace("/", "-");
           xhr.open('GET', '/years/' + team);
           xhr.onload = function() {
             if (xhr.status === 200) {
