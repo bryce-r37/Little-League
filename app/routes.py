@@ -120,7 +120,7 @@ def background():
 @app.route('/admin')
 @login_required
 def admin():
-    if current_user.username != 'bryce-37':
+    if current_user.username != 'Little-League-Admin':
         return redirect(url_for('home'))
     return render_template('admin.html')
 

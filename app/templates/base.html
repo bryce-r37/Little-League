@@ -112,7 +112,7 @@
    </head>
    <body>
       <div class="page-bar">
-         {% if current_user.username == "bryce-37" %}
+         {% if current_user.username == "Little-League-Admin" %}
             <b class="app-title">Little League Admin </b>
          {% else %}
             <b class="app-title">Little League </b>
@@ -121,7 +121,7 @@
          <a href="{{ url_for('allPitchers') }}"><button class="page-tab">All Pitchers</button></a>
          <a href="{{ url_for('allBatters') }}"><button class="page-tab">All Batters</button></a>
          <a href="{{ url_for('background') }}"><button class="page-tab">Background</button></a>
-         {% if current_user.username == "bryce-37" %}
+         {% if current_user.username == "Little-League-Admin" %}
             <a href="{{ url_for('admin') }}"><button class="page-tab">User Queries</button></a>
          {% endif %}
          <a href="{{ url_for('logout') }}"><button class="logout-button">Log Out</button></a>
