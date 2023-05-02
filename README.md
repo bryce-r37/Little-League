@@ -40,7 +40,7 @@ werkzeug
 1. In Bash/Zsh, run the command `export FLASK_APP=little-league.py` to set the *App* variable.
 1. In Bash/Zsh, run the command `flask run` to start the web app.
 1. Go to <http://127.0.0.1/5000> (or the link provided by Flask) to view the website.
-  1. Create a new account or log in to an existing user/admin account to view statistics.
+   1. Create a new account or log in to an existing user/admin account to view statistics.
 
 ## Website Features
 - Secure login with password encryption
