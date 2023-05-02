@@ -6,7 +6,8 @@
         <div class="teams">
           <label for="team">Select your favorite team:</label>
            <select id="team" name="team" class="dropdown" onchange="window.location.href='{{ url_for('update_team', team='') }}' + document.getElementById('team').value">
-
+                <option value="---"> </option>
+                <option value="---">Default Background</option>
               {% for team in teams %}
                 <option value="{{ team[0] }}">{{ team[0] }}</option>
               {% endfor %}

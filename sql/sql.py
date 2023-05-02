@@ -112,12 +112,13 @@ def ChangeBackground(team, user):
     params = [team]
     cur.execute(sql, params)
     team = cur.fetchone()
-
-    print(team[0])
-    print(user)
+    if team is None:
+        team = "NUL"
+    else:
+        team = team[0]
 
     sql = "UPDATE user SET team = %s WHERE username = %s"
-    params = [team[0], user]
+    params = [team, user]
     cur.execute(sql, params)
     con.commit()
 
