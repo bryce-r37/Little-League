@@ -2,16 +2,14 @@
 
 {% block content %}
    <div class="table-header">
-      <h1>{{ name }} - {{ year }} Season</h1>
-      <div>
-         {% if page  == "Pitching" %}
-         <button class="stat-tab-selected">Pitching</button>
-         <a href="{{ url_for('batting', teamID=team, year=year) }}"><button class="stat-tab">Batting</button></a>
-         {% else %}
-         <a href="{{ url_for('pitching', teamID=team, year=year) }}"><button class="stat-tab">Pitching</button></a>
-         <button class="stat-tab-selected">Batting</button>
-         {% endif %}
-      </div>
+      <button class="stat-tab-selected"><b>{{ name }} - {{ year }} Season</b></button>
+      {% if page  == "Pitching" %}
+      <button class="stat-tab-selected">Pitching</button>
+      <a href="{{ url_for('batting', teamID=team, year=year) }}"><button class="stat-tab">Batting</button></a>
+      {% else %}
+      <a href="{{ url_for('pitching', teamID=team, year=year) }}"><button class="stat-tab">Pitching</button></a>
+      <button class="stat-tab-selected">Batting</button>
+      {% endif %}
    </div>
    <div class="table-div">
    {% block stats %}{% endblock %}
