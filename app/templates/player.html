@@ -2,7 +2,8 @@
 
 {% block content %}
    
-   <h2 class="stint">{{ stints[0][0] }}</h2>
+   <div class="player-container">
+  <h2 class="stint">{{ stints[0][0] }}</h2>
    {% for stint in stints %}
       <a href="{{ url_for('pitching', teamID=stint[8], year=stint[2]) }}">
          <h3 class="players">{{ stint[1] }} - {{ stint[2] }} Season</h3>
@@ -24,4 +25,5 @@
          </tr>
       </table>
    {% endfor %}
+</div>
 {% endblock %}

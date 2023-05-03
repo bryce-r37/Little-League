@@ -59,3 +59,36 @@ werkzeug
 - Artwork is not owned by Little League
 - Artwork is intended only for private/personal use
 - No profits were made off of artwork (except for hopefully a few extra credit points)
+
+## Extra Features
+All
+   - Attractive UI (tables, buttons, font, tabs, background)
+Create Account
+   - Validation that there is input for each field
+   - Extra validation for email, password, and that both passwords match
+Pitchers
+   - Search functionality
+   - Sort by statistic functionality
+   - Show x amount of entries and multiple pages
+   - Link to each player
+   - ERA column
+Batters
+   - Search functionality
+   - Sort by statistic functionality
+   - Show x amount of entries and multiple pages
+   - Link to each player
+   - AB column
+All Pitchers/Batters
+   - All Pitchers by year page
+   - All Batters by year page
+   - Search functionality
+   - Sort by statistic functionality
+   - Link to each player
+   - Show x amount of entries and multiple pages
+Players
+   - Shows each player, their stints, and ther stats per stint
+   - Link to each stint with specific team
+My Team Tab
+   - Ability to set background for selected favorite current team
+   - Favorite team background is automatically displayed on user login
+Log Out functionality
