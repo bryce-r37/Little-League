@@ -30,6 +30,7 @@ def home():
         team = request.form.get('team')
         year = request.form.get('year')
         team = FetchTeamID(team, year)
+        PostRequest(current_user.username, team, year)
         return redirect(url_for('pitching', teamID=team, year=year))
     return render_template('home.html', title='Team Select', teams=teams)
 
@@ -136,6 +137,6 @@ def logout():
 
 @app.route('/update-team/<team>', methods=['GET'])
 def update_team(team):
-    result = ChangeBackRound(team=team)
+    result = ChangeBackground(team=team)
 
     return redirect(url_for('background'))
