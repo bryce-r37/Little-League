@@ -12,7 +12,8 @@ from app.models import User
 from sql import sql
 from sql.sql import ValidateLogin, CreateAccount, FetchPitching, FetchBatting, \
     FetchPlayer, FetchTeams, FetchYears, FetchAllYears, FetchTeamID, FetchTeamName, \
-    FetchAllPitching, FetchAllBatting, FetchUser, FetchCurrentTeams, ChangeBackground
+    FetchAllPitching, FetchAllBatting, FetchUser, FetchCurrentTeams, \
+    ChangeBackground, PostRequest, CountRequests, FetchRequests
 
 
 @app.route('/index')
@@ -29,6 +30,7 @@ def home():
         team = request.form.get('team')
         year = request.form.get('year')
         team = FetchTeamID(team, year)
+        PostRequest(current_user.username, team, year)
         return redirect(url_for('pitching', teamID=team, year=year))
     return render_template('home.html', title='Team Select', teams=teams)
 
@@ -124,7 +126,10 @@ def background():
 def admin():
     if current_user.username != 'Little-League-Admin':
         return redirect(url_for('home'))
-    return render_template('admin.html')
+    requests = CountRequests()
+    users = FetchRequests()
+    return render_template('admin.html', title='Admin', requests=requests,
+            users=users)
 
 
 @app.route('/logout')
