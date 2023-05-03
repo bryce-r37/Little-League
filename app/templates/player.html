@@ -5,7 +5,7 @@
    <div class="player-container">
   <h2 class="stint">{{ stints[0][0] }}</h2>
    {% for stint in stints %}
-      <a href="{{ url_for('pitching', teamID=stint[8], year=stint[2]) }}">
+      <a href="{{ url_for('log_request', teamID=stint[8], year=stint[2]) }}">
          <h3 class="players">{{ stint[1] }} - {{ stint[2] }} Season</h3>
       </a>
       <table class="player-table">
