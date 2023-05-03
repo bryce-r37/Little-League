@@ -322,6 +322,9 @@ label {
 
 .players {
   margin-left: 25px;
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
 }
 
 .player-table {
@@ -329,12 +332,15 @@ label {
   border-radius: 5px;
   box-shadow: 0px 10px 30px 5px rgba(0, 0, 0, 0.1);
   table-layout: auto;
+  border-collapse: collapse;
+  margin-top: 10px;
+  margin-right: 25px;
+  width: 97%;
 }
 
 .stint {
   margin-left: 25px;
 }
-
 
 .player-container {
   background-color: #fff;
@@ -350,18 +356,6 @@ label {
   font-size: 24px;
   font-weight: bold;
   margin-bottom: 20px;
-}
-
-.players {
-  font-size: 18px;
-  font-weight: bold;
-  margin-bottom: 10px;
-}
-
-.player-table {
-  border-collapse: collapse;
-  margin-top: 10px;
-  width: 100%;
 }
 
 .player-table th {

@@ -80,7 +80,11 @@
 
 <script>
    $(document).ready(function() {
-      var table = $('#table').DataTable();
+      var table = $('#table').DataTable({
+         "paging": true,
+         "pageLength": 10,
+         "lengthMenu": [[10, 25, 50, 100, 250, -1], [10, 25, 50, 100, 250, "All"]]
+      });
 
       $('#search').on('keyup', function() {
          table.search($(this).val()).draw();
