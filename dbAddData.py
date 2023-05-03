@@ -111,7 +111,7 @@ with open('baseballdatabank-2023.1/contrib/AwardsPlayers.csv', 'r') as csvfile:
     csvreader = csv.reader(csvfile)
     next(csvreader)
 
-    sql = '''INSERT INTO awards (award_name, yearID, 
+    sql = '''INSERT INTO awards (awardID, yearID, 
                                 playerID, lgID, tie, notes) VALUES (%s, %s, %s, %s, %s, %s)'''
 
     for row in csvreader:
@@ -128,7 +128,7 @@ with open('baseballdatabank-2023.1/contrib/AwardsManagers.csv', 'r') as csvfile:
     csvreader = csv.reader(csvfile)
     next(csvreader)
 
-    sql = '''INSERT INTO awards (award_name, yearID, 
+    sql = '''INSERT INTO awards (awardID, yearID, 
                                 playerID, lgID, tie, notes) VALUES (%s, %s, %s, %s, %s, %s)'''
 
     for row in csvreader:
