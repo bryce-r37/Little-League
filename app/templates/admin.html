@@ -20,10 +20,10 @@
          <tbody>
             {% for user in users %}
             <tr>
-               <td><b>{{ user[1] }}</b></td>
+               <td><b>{{ user[0] }}</b></td>
+               <td>{{ user[1] }}</td>
                <td>{{ user[2] }}</td>
                <td>{{ user[3] }}</td>
-               <td>{{ user[4] }}</td>
             </tr>
             {% endfor %}
          </tbody>
