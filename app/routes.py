@@ -95,7 +95,7 @@ def player(playerid):
 def allPitchers():
     allYears = FetchAllYears()
     allYears = sorted([str(y[0]) for y in allYears], reverse=True)
-    year = request.args.get('year', '2021')
+    year = request.args.get('year', '2022')
     players = FetchAllPitching(year)
     return render_template('allPitchers.html', title='All Pitchers', players=players, years=allYears,
                            selected_year=year)
@@ -106,7 +106,7 @@ def allPitchers():
 def allBatters():
     allYears = FetchAllYears()
     allYears = sorted([str(y[0]) for y in allYears], reverse=True)
-    year = request.args.get('year', '2021')
+    year = request.args.get('year', '2022')
     players = FetchAllBatting(year)
     return render_template('allBatters.html', title='All Batters', players=players, years=allYears, 
                            selected_year=year)
@@ -115,7 +115,7 @@ def allBatters():
 @app.route('/background')
 @login_required
 def background():
-    currentTeams = FetchCurrentTeams("2021")
+    currentTeams = FetchCurrentTeams("2022")
     return render_template('background.html', title='Background', teams=currentTeams)
 
 
