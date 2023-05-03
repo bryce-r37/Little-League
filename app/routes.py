@@ -140,3 +140,9 @@ def update_team(team):
     result = ChangeBackground(team=team)
 
     return redirect(url_for('background'))
+
+
+@app.route('/log-request/<teamID>/<year>')
+def log_request(teamID, year):
+    PostRequest(current_user.username, teamID, year)
+    return redirect(url_for('pitching', teamID=teamID, year=year))

@@ -108,7 +108,7 @@ def FetchCurrentTeams(yearID):
     return teams
 
 
-def ChangeBackRound(team):
+def ChangeBackground(team):
     sql = "UPDATE user SET team = (SELECT DISTINCT teamID FROM teams WHERE team_Name = %s AND yearID = 2022) WHERE username = %s"
     params = [team, current_user.username]
     cur.execute(sql, params)
