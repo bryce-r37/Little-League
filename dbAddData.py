@@ -15,14 +15,15 @@ with open('baseballdatabank-2023.1/core/people.csv', 'r') as csvfile:
     sql = '''INSERT INTO people (playerID, birthYear, birthMonth, birthDay, birthCountry, 
                                     birthState, birthCity, deathYear, deathMonth, deathDay, 
                                     deathCountry, deathState, deathCity, nameFirst, nameLast, 
-                                    nameGiven, weight, height, bats, throws, debutDate, finalGameDate, 
-                                    retroID, bbrefID) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)'''
+                                    nameGiven, weight, height, bats, throws, debutDate, finalGameDate) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)'''
 
     for row in csvreader:
         year = row[20][:4]
+        params = [row[0], row[1], row[2], row[3], row[4],  row[5], row[6], row[7], row[8], row[9], row[10], row[11], row[12],
+                  row[13], row[14], row[15], row[16], row[17], row[18], row[19], row[20], row[21]]
         if year == "2022":
             row = [None if x == "" else x for x in row]
-            cur.execute(sql, row)
+            cur.execute(sql, params)
 
     con.commit()
 
