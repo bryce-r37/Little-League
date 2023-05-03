@@ -223,7 +223,7 @@ def FetchAllBatting(year):
 
 
 def PostRequest(user, team, year):
-    sql = "INSERT INTO userquery (username, team, year, time) VALUES " \
+    sql = "INSERT INTO userquery (username, team, year, datetime) VALUES " \
           "(%s, %s, %s, %s)"
 
     params = [user, team, year, time.localtime()]
@@ -242,7 +242,7 @@ def CountRequests():
 
 
 def FetchRequests():
-    sql = "SELECT username, team, year, time FROM userquery"
+    sql = "SELECT username, team, year, datetime FROM userquery"
 
     cur.execute(sql)
 
