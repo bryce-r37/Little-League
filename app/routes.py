@@ -126,7 +126,10 @@ def background():
 def admin():
     if current_user.username != 'Little-League-Admin':
         return redirect(url_for('home'))
-    return render_template('admin.html')
+    count = CountRequests()
+    requests = FetchRequests()
+    return render_template('admin.html', title='Admin', count=count,
+            requests=requests)
 
 
 @app.route('/logout')

@@ -5,7 +5,7 @@
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
 
     <div class="table-header">
-        <button class="stat-tab-selected"><b>Total Requests: </b>{{ requests }}</button>
+        <button class="stat-tab-selected"><b>Total Requests: </b>{{ count }}</button>
     </div>
     <div class="table-wrapper">
       <div class="search-box">
@@ -22,12 +22,12 @@
             </tr>
          </thead>
          <tbody>
-            {% for user in users %}
+            {% for request in requests %}
             <tr>
-               <td><b>{{ user[0] }}</b></td>
-               <td>{{ user[1] }}</td>
-               <td>{{ user[2] }}</td>
-               <td>{{ user[3] }}</td>
+               <td><b>{{ request[0] }}</b></td>
+               <td>{{ request[1] }}</td>
+               <td>{{ request[2] }}</td>
+               <td>{{ request[3] }}</td>
             </tr>
             {% endfor %}
          </tbody>
