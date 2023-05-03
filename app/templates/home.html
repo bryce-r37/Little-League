@@ -1,46 +1,47 @@
 {% extends "base.html" %}    
 
 {% block content %}
-   <div class="container">
-         <h1>Team Select</h1>
-         <form action="{{ url_for('home') }}" method="post">
-        <div class="teams">
-          <label for="team">Team:</label>
-          <select id="team" name="team" class="dropdown" onchange="getYears(this.value)">
-              {% for team in teams %}
-                <option value="{{ team[0] }}">{{ team[0] }}</option>
-              {% endfor %}
-          </select>
-        </div>
-        <div class="years">
-          <script>
-        function getYears(team) {
-          var xhr = new XMLHttpRequest();
-          team = team.replace("/", "-");
-          xhr.open('GET', '/years/' + team);
-          xhr.onload = function() {
-            if (xhr.status === 200) {
-              var years = JSON.parse(xhr.responseText);
-              var yearSelect = document.getElementById('year');
-              yearSelect.innerHTML = '';
-              years.forEach(function(year) {
-                var option = document.createElement('option');
-                option.text = year;
-                option.value = year;
-                yearSelect.add(option);
-              });
-            } else {
-              console.log('Request failed.  Returned status of ' + xhr.status);
+    <div class="container">
+        <h1>Team Select</h1>
+        <form action="{{ url_for('home') }}" method="post">
+        <div class="year-dropdown">
+            <div class="teams">
+                <label for="team">Team:</label>
+                <select id="team" name="team" class="dropdown" onchange="getYears(this.value)">
+                    {% for team in teams %}
+                    <option value="{{ team[0] }}">{{ team[0] }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="years">
+            <script>
+            function getYears(team) {
+                var xhr = new XMLHttpRequest();
+                team = team.replace("/", "-");
+                xhr.open('GET', '/years/' + team);
+                xhr.onload = function() {
+                    if (xhr.status === 200) {
+                        var years = JSON.parse(xhr.responseText);
+                        var yearSelect = document.getElementById('year');
+                        yearSelect.innerHTML = '';
+                        years.forEach(function(year) {
+                            var option = document.createElement('option');
+                            option.text = year;
+                            option.value = year;
+                            yearSelect.add(option);
+                        });
+                    } else {
+                        console.log('Request failed.  Returned status of ' + xhr.status);
+                    }
+                };
+                xhr.send();
             }
-          };
-          xhr.send();
-        }
-        getYears(document.getElementById('team').value)
-        </script>
-          <label for="year">Year:</label>
-          <select id="year" name="year" class="dropdown"></select><br><br>
+            getYears(document.getElementById('team').value)
+            </script>
+            <label for="year">Year:</label>
+            <select id="year" name="year" class="dropdown"></select><br><br>
+        </div>
         </form>
         <button type="submit" name="submit" class="button">Submit</button>
-      </div>
     </div>
 {% endblock %}

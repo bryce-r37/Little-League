@@ -79,6 +79,7 @@ label {
     margin-bottom: 0px;
     margin-left: 25px;
     margin-right: 25px;
+    margin-top: 25px;
  }
  .search-box label {
     margin-right: 5px;
@@ -115,6 +116,16 @@ label {
   padding: 5px;
   width: 300px;
   border-radius: 5px;
+}
+
+.year-dropdown {
+    margin-left: 10px;
+}
+
+.year-dropdown select {
+    border: 1px solid #ddd;
+    padding: 5px;
+    border-radius: 5px;
 }
 
 .teams {
