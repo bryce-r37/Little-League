@@ -119,6 +119,241 @@ with open('baseballdatabank-2023.1/contrib/AwardsPlayers.csv', 'r') as csvfile:
         params = [row[1], row[2], row[0], row[3], row[4], row[5]]
 
         if year == "2022":
+            row = [None if x == "" else x for x in row]
+            cur.execute(sql, params)
+
+    con.commit()
+
+with open('baseballdatabank-2023.1/contrib/AwardsManagers.csv', 'r') as csvfile:
+    csvreader = csv.reader(csvfile)
+    next(csvreader)
+
+    sql = '''INSERT INTO awards (award_name, yearID, 
+                                playerID, lgID, tie, notes) VALUES (%s, %s, %s, %s, %s, %s)'''
+
+    for row in csvreader:
+        year = row[2]
+        params = [row[1], row[2], row[0], row[3], row[4], row[5]]
+
+        if year == "2022":
+            row = [None if x == "" else x for x in row]
+            cur.execute(sql, params)
+
+    con.commit()
+
+with open('baseballdatabank-2023.1/core/AllstarFull.csv', 'r') as csvfile:
+    csvreader = csv.reader(csvfile)
+    next(csvreader)
+
+    sql = '''INSERT INTO allstarfull (playerID, lgID, teamID, yearID, 
+                                gameNum, gameID, GP, startingPos) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)'''
+
+    for row in csvreader:
+        year = row[1]
+        params = [row[0], row[5], row[4], row[1], row[2], row[3], row[6], row[7]]
+
+        if year == "2022":
+            row = [None if x == "" else x for x in row]
+            cur.execute(sql, params)
+
+    con.commit()
+
+
+with open('baseballdatabank-2023.1/contrib/AwardsSharePlayers.csv', 'r') as csvfile:
+    csvreader = csv.reader(csvfile)
+    next(csvreader)
+
+    sql = '''INSERT INTO awardsshare (award_name, yearID, playerID, lgID, pointsWon, 
+                                        pointsMax, votesFirst) VALUES (%s, %s, %s, %s, %s, %s)'''
+
+    for row in csvreader:
+        year = row[1]
+        params = [row[0], row[1], row[3], row[2], row[4], row[5], row[6]]
+
+        if year == "2022":
+            row = [None if x == "" else x for x in row]
+            cur.execute(sql, params)
+
+    con.commit()
+
+with open('baseballdatabank-2023.1/contrib/AwardsShareManagers.csv', 'r') as csvfile:
+    csvreader = csv.reader(csvfile)
+    next(csvreader)
+
+    sql = '''INSERT INTO awardsshare (award_name, yearID, playerID, lgID, pointsWon, 
+                                        pointsMax, votesFirst) VALUES (%s, %s, %s, %s, %s, %s)'''
+
+    for row in csvreader:
+        year = row[1]
+        params = [row[0], row[1], row[3], row[2], row[4], row[5], row[6]]
+
+        if year == "2022":
+            row = [None if x == "" else x for x in row]
+            cur.execute(sql, params)
+
+    con.commit()
+
+with open('baseballdatabank-2023.1/core/BattingPost.csv', 'r') as csvfile:
+    csvreader = csv.reader(csvfile)
+    next(csvreader)
+
+    sql = '''INSERT INTO battingpost (playerID, yearId, teamID, round, b_G, 
+                                    b_AB, b_R, b_H, b_2B, b_3B, b_HR, b_RBI, 
+                                    b_SB, b_CS, b_BB, b_SO, b_IBB, b_HBP, b_SH, 
+                                    b_SF, b_GIDP) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)'''
+
+    for row in csvreader:
+        year = row[0]
+        params = [row[2], row[0], row[3], row[1], row[5], row[6], row[7], row[8], row[9], row[10], row[11], row[12], row[13], row[14], row[15], row[16], row[17], row[18], row[19], row[20], row[21]]
+        if year == "2022":
+            row = [None if x == "" else x for x in row]
+            cur.execute(sql, params)
+
+    con.commit()
+
+with open('baseballdatabank-2023.1/contrib/CollegePlaying.csv', 'r') as csvfile:
+    csvreader = csv.reader(csvfile)
+    next(csvreader)
+
+    sql = '''INSERT INTO collegeplaying (playerID, schoolID, yearID) VALUES (%s, %s, %s)'''
+
+    for row in csvreader:
+        year = row[2]
+        params = [row[0], row[1], row[2]]
+        if year == "2022":
+            row = [None if x == "" else x for x in row]
+            cur.execute(sql, params)
+
+    con.commit()
+
+with open('baseballdatabank-2023.1/core/Fielding.csv', 'r') as csvfile:
+    csvreader = csv.reader(csvfile)
+    next(csvreader)
+
+    sql = '''INSERT INTO fielding (playerID, yearID, teamID, stint, position, 
+                                    f_G, f_GS, f_InnOuts, f_PO, f_A, f_E, f_DP, f_PB, 
+                                    f_WP, f_SB, f_CS, f_ZR) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)'''
+
+    for row in csvreader:
+        year = row[1]
+        params = [row[0], row[1], row[3], row[2], row[5], row[6], row[7], row[8], row[9], row[10], row[11], row[12], row[13], row[14], row[15], row[16], row[17]]
+        if year == "2022":
+            row = [None if x == "" else x for x in row]
+            cur.execute(sql, params)
+
+    con.commit()
+
+with open('baseballdatabank-2023.1/core/FieldingPost.csv', 'r') as csvfile:
+    csvreader = csv.reader(csvfile)
+    next(csvreader)
+
+    sql = '''INSERT INTO fieldingpost (playerID, yearID, teamID, round, position, 
+                                    f_G, f_GS, f_InnOuts, f_PO, f_A, f_E, f_DP, f_TP, f_PB, 
+                                    f_SB, f_CS) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)'''
+
+    for row in csvreader:
+        year = row[1]
+        params = [row[0], row[1], row[2], row[4], row[5], row[6], row[7], row[8], row[9], row[10], row[11], row[12], row[13], row[14], row[15], row[16]]
+        if year == "2022":
+            row = [None if x == "" else x for x in row]
+            cur.execute(sql, params)
+
+    con.commit()
+
+with open('baseballdatabank-2023.1/contrib/HallOfFame.csv', 'r') as csvfile:
+    csvreader = csv.reader(csvfile)
+    next(csvreader)
+
+    sql = '''INSERT INTO halloffame (playerID, yearID, votedBy, ballots, needed, votes, 
+                                        inducted, category, note) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)'''
+
+    for row in csvreader:
+        year = row[1]
+        params = [row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8]]
+        if year == "2022":
+            row = [None if x == "" else x for x in row]
+            cur.execute(sql, params)
+
+    con.commit()
+
+with open('baseballdatabank-2023.1/core/HomeGames.csv', 'r') as csvfile:
+    csvreader = csv.reader(csvfile)
+    next(csvreader)
+
+    sql = '''INSERT INTO homegames (teamID, parkID, yearID, firstGame, 
+                                        lastGame, games, openings, attendance) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)'''
+
+    for row in csvreader:
+        year = row[0]
+        params = [row[2], row[3], row[0], row[4], row[5], row[6], row[7], row[8]]
+        if year == "2022":
+            row = [None if x == "" else x for x in row]
+            cur.execute(sql, params)
+
+    con.commit()
+
+with open('baseballdatabank-2023.1/core/Managers.csv', 'r') as csvfile:
+    csvreader = csv.reader(csvfile)
+    next(csvreader)
+
+    sql = '''INSERT INTO managers (playerID, yearID, teamID, inSeason, manager_G, 
+                                    manager_W, manager_L, teamRank, plyrMgr) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)'''
+
+    for row in csvreader:
+        year = row[1]
+        params = [row[0], row[1], row[2], row[4], row[5], row[6], row[7], row[8], row[9]]
+        if year == "2022":
+            row = [None if x == "" else x for x in row]
+            cur.execute(sql, params)
+
+    con.commit()
+
+
+with open('baseballdatabank-2023.1/core/PitchingPost.csv', 'r') as csvfile:
+    csvreader = csv.reader(csvfile)
+    next(csvreader)
+
+    sql = '''INSERT INTO pitchingpost (playerID, yearID, teamID, round, p_W, 
+                                    p_L, p_G, p_GS, p_CG, p_SHO, p_SV, p_IPOuts, 
+                                    p_H, p_ER, p_HR, p_BB, p_SO, p_BAOpp, p_ERA, 
+                                    p_IBB,p_WP, p_HBP, p_BK, p_BFP, p_GF, p_R, p_SH, 
+                                    p_GIDP) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)'''
+
+    for row in csvreader:
+        year = row[1]
+        params = [row[0], row[1], row[3], row[2], row[5], row[6], row[7], row[8], row[9], row[10], row[11], row[12], row[13], row[14], row[15], row[16], row[17], row[18], row[19], row[20], row[21], row[22], row[23], row[24],row[25], row[26], row[27], row[28]]
+        if year == "2022":
+            row = [None if x == "" else x for x in row]
+            cur.execute(sql, params)
+
+    con.commit()
+
+with open('baseballdatabank-2023.1/contrib/Salaries.csv', 'r') as csvfile:
+    csvreader = csv.reader(csvfile)
+    next(csvreader)
+
+    sql = '''INSERT INTO pitchingpost (playerID, yearId, teamID, lgId, salary) VALUES (%s, %s, %s, %s, %s)'''
+
+    for row in csvreader:
+        year = row[0]
+        params = [row[3], row[0], row[1], row[2], row[4]]
+        if year == "2022":
+            row = [None if x == "" else x for x in row]
+            cur.execute(sql, params)
+
+    con.commit()
+
+with open('baseballdatabank-2023.1/core/SeriesPost.csv', 'r') as csvfile:
+    csvreader = csv.reader(csvfile)
+    next(csvreader)
+
+    sql = '''INSERT INTO seriesPost (teamIDwinner, teamIDloser, yearID, 
+                                        round, wins, loses, ties) VALUES (%s, %s, %s, %s, %s, %s, %s)'''
+
+    for row in csvreader:
+        year = row[0]
+        params = [row[2], row[4], row[0], row[1], row[6], row[7], row[8]]
+        if year == "2022":
             print(year)
             row = [None if x == "" else x for x in row]
             cur.execute(sql, params)
