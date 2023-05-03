@@ -12,7 +12,8 @@ from app.models import User
 from sql import sql
 from sql.sql import ValidateLogin, CreateAccount, FetchPitching, FetchBatting, \
     FetchPlayer, FetchTeams, FetchYears, FetchAllYears, FetchTeamID, FetchTeamName, \
-    FetchAllPitching, FetchAllBatting, FetchUser, FetchCurrentTeams, ChangeBackRound
+    FetchAllPitching, FetchAllBatting, FetchUser, FetchCurrentTeams, \
+    ChangeBackground, PostRequest, CountRequests, FetchRequests
 
 
 @app.route('/index')
