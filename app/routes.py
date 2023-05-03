@@ -12,8 +12,7 @@ from app.models import User
 from sql import sql
 from sql.sql import ValidateLogin, CreateAccount, FetchPitching, FetchBatting, \
     FetchPlayer, FetchTeams, FetchYears, FetchAllYears, FetchTeamID, FetchTeamName, \
-    FetchAllPitching, FetchAllBatting, FetchUser, FetchCurrentTeams, \
-    ChangeBackground, PostRequest, CountRequests, FetchRequests
+    FetchAllPitching, FetchAllBatting, FetchUser, FetchCurrentTeams, ChangeBackRound
 
 
 @app.route('/index')
@@ -30,7 +29,6 @@ def home():
         team = request.form.get('team')
         year = request.form.get('year')
         team = FetchTeamID(team, year)
-        PostRequest(current_user.username, team, year)
         return redirect(url_for('pitching', teamID=team, year=year))
     return render_template('home.html', title='Team Select', teams=teams)
 
@@ -126,10 +124,7 @@ def background():
 def admin():
     if current_user.username != 'Little-League-Admin':
         return redirect(url_for('home'))
-    requests = CountRequests()
-    users = FetchRequests()
-    return render_template('admin.html', title='Admin', requests=requests,
-            users=users)
+    return render_template('admin.html')
 
 
 @app.route('/logout')
@@ -140,12 +135,6 @@ def logout():
 
 @app.route('/update-team/<team>', methods=['GET'])
 def update_team(team):
-    result = ChangeBackground(team=team, user=current_user.username)
+    result = ChangeBackRound(team=team)
 
     return redirect(url_for('background'))
-
-
-@app.route('/log-request/<teamID>/<year>')
-def log_request(teamID, year):
-    PostRequest(current_user.username, teamID, year)
-    return redirect(url_for('pitching', teamID=teamID, year=year))

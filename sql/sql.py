@@ -108,20 +108,11 @@ def FetchCurrentTeams(yearID):
     return teams
 
 
-def ChangeBackground(team, user):
-    sql = "SELECT DISTINCT teamID FROM teams WHERE team_name = %s AND yearID = '2021'"
-    params = [team]
+def ChangeBackRound(team):
+    sql = "UPDATE user SET team = (SELECT DISTINCT teamID FROM teams WHERE team_Name = %s AND yearID = 2021) WHERE username = %s"
+    params = [team, current_user.username]
     cur.execute(sql, params)
-    team = cur.fetchone()
-    if team is None:
-        team = "NUL"
-    else:
-        team = team[0]
-
-    sql = "UPDATE user SET team = %s WHERE username = %s"
-    params = [team, user]
-    cur.execute(sql, params)
-    con.commit()
+    return cur.fetchall()
 
 
 def FetchPitching(team, year):
