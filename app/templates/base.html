@@ -120,7 +120,7 @@
          <a href="{{ url_for('home') }}"><button class="page-tab">Team Select</button></a>
          <a href="{{ url_for('allPitchers') }}"><button class="page-tab">All Pitchers</button></a>
          <a href="{{ url_for('allBatters') }}"><button class="page-tab">All Batters</button></a>
-         <a href="{{ url_for('background') }}"><button class="page-tab">Background</button></a>
+         <a href="{{ url_for('background') }}"><button class="page-tab">My Team</button></a>
          {% if current_user.username == "Little-League-Admin" %}
             <a href="{{ url_for('admin') }}"><button class="page-tab">User Queries</button></a>
          {% endif %}
