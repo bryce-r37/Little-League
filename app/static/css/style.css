@@ -2,7 +2,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-  background-color: #a0e0ff;
+  background-color: #000000;
 }
 
 .container {
@@ -11,8 +11,8 @@ body {
   margin: 0 auto;
   padding: 20px;
   background-color: #fff;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
   position: absolute;
   top: 50%;
   left: 50%;
