@@ -21,6 +21,7 @@ with open('baseballdatabank-2023.1/core/people.csv', 'r') as csvfile:
     for row in csvreader:
         year = row[20][:4]
         if year == "2022":
+            row = [None if x == "" else x for x in row]
             cur.execute(sql, row)
 
     con.commit()
@@ -40,6 +41,7 @@ with open('baseballdatabank-2023.1/core/Pitching.csv', 'r') as csvfile:
         year = row[1]
         params = [row[0], row[1], row[3], row[2], row[5], row[6], row[7], row[8], row[9], row[10], row[11], row[12], row[13], row[14], row[15], row[16], row[17], row[18], row[19], row[20], row[21], row[22], row[23], row[24],row[25], row[26], row[27], row[28], row[29]]
         if year == "2022":
+            row = [None if x == "" else x for x in row]
             cur.execute(sql, params)
 
     con.commit()
@@ -57,6 +59,7 @@ with open('baseballdatabank-2023.1/core/Batting.csv', 'r') as csvfile:
         year = row[1]
         params = [row[0], row[1], row[3], row[2], row[5], row[6], row[7], row[8], row[9], row[10], row[11], row[12], row[13], row[14], row[15], row[16], row[17], row[18], row[19], row[20], row[21]]
         if year == "2022":
+            row = [None if x == "" else x for x in row]
             cur.execute(sql, params)
 
     con.commit()
@@ -73,6 +76,7 @@ with open('baseballdatabank-2023.1/core/Appearances.csv', 'r') as csvfile:
         year = row[0]
         params = [row[3], row[0], row[1], row[4], row[5], row[6], row[7], row[8], row[9], row[10], row[11], row[12], row[13], row[14], row[15], row[16], row[17], row[18], row[19], row[20]]
         if year == "2022":
+            row = [None if x == "" else x for x in row]
             cur.execute(sql, params)
 
     con.commit()
@@ -98,6 +102,7 @@ with open('baseballdatabank-2023.1/core/Teams.csv', 'r') as csvfile:
                   row[33], row[34], row[35], row[36], row[37], row[38], row[39], row[41], row[42], row[43], row[44]]
 
         if year == "2022":
+            row = [None if x == "" else x for x in row]
             cur.execute(sql, params)
 
     con.commit()
@@ -115,6 +120,7 @@ with open('baseballdatabank-2023.1/contrib/AwardsPlayers.csv', 'r') as csvfile:
 
         if year == "2022":
             print(year)
+            row = [None if x == "" else x for x in row]
             cur.execute(sql, params)
 
     con.commit()
