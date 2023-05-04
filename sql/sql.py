@@ -3,7 +3,7 @@
 # date: 4/24/23
 
 import pymysql
-import time
+from datetime import datetime
 from flask_login import current_user
 from pymysql import IntegrityError
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -223,10 +223,10 @@ def FetchAllBatting(year):
 
 
 def PostRequest(user, team, year):
-    sql = "INSERT INTO userquery (username, team, year, time) VALUES " \
+    sql = "INSERT INTO userquery (username, team, year, datetime) VALUES " \
           "(%s, %s, %s, %s)"
 
-    params = [user, team, year, time.localtime()]
+    params = [user, team, year, datetime.today()]
 
     cur.execute(sql, params)
 
@@ -242,7 +242,7 @@ def CountRequests():
 
 
 def FetchRequests():
-    sql = "SELECT username, team, year, time FROM userquery"
+    sql = "SELECT username, team, year, datetime FROM userquery"
 
     cur.execute(sql)
 
