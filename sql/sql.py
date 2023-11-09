@@ -1,5 +1,5 @@
 # file: sql.py
-# authors: Carson Buntin, Bryce Robinson
+# authors: Carson Buntin, Bryce Robinson, Michael Mathews
 # date: 4/24/23
 
 import pymysql
@@ -223,7 +223,7 @@ def FetchAllBatting(year):
 
 
 def PostRequest(user, team, year):
-    sql = "INSERT INTO userquery (username, team, year, datetime) VALUES " \
+    sql = "INSERT INTO userquery (username, team, year, time) VALUES " \
           "(%s, %s, %s, %s)"
 
     params = [user, team, year, datetime.today()]
