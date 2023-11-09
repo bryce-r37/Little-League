@@ -139,8 +139,7 @@ def FetchBatting(team, year):
           "sum(b_AB) AS AB, round(IFNULL(sum(b_H)/sum(b_AB), 0), 3) AS AVG, " \
           "round(IFNULL((sum(b_H)+sum(b_BB)+sum(b_HBP))/(sum(b_AB)+sum(b_BB)+" \
           "sum(b_HBP)+sum(b_SF)), 0), 3) AS OBP, " \
-          "round(IFNULL(((sum(b_H)-sum(b_2B)-sum(b_3B)-sum(b_HR))+(2*sum(b_2B))+" \
-          "(3*sum(b_3B))+(4*sum(b_HR)))/sum(b_AB), 0), 3) AS SLG " \
+          "sum(IFNULL(b_HR, 0)) AS HR " \
           "FROM batting NATURAL JOIN people NATURAL JOIN appearances " \
           "WHERE teamid = %s AND yearid = %s AND NOT b_AB = 0 GROUP BY playerid"
 
@@ -201,8 +200,7 @@ def FetchAllBatting(year):
           "sum(b_AB) AS AB, round(IFNULL(sum(b_H)/sum(b_AB), 0), 3) AS AVG, " \
           "round(IFNULL((sum(b_H)+sum(b_BB)+sum(b_HBP))/(sum(b_AB)+sum(b_BB)+" \
           "sum(b_HBP)+sum(b_SF)), 0), 3) AS OBP, " \
-          "round(IFNULL(((sum(b_H)-sum(b_2B)-sum(b_3B)-sum(b_HR))+(2*sum(b_2B))+" \
-          "(3*sum(b_3B))+(4*sum(b_HR)))/sum(b_AB), 0), 3) AS SLG " \
+          "sum(IFNULL(b_HR, 0)) AS HR " \
           "FROM batting NATURAL JOIN people NATURAL JOIN appearances " \
           "WHERE yearid = %s AND b_AB != 0 GROUP BY playerid" 
 
